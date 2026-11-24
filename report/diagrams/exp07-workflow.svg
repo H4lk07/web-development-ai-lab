@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 240" width="100%" height="100%" style="background-color: #ffffff; font-family: Calibri, -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <g>
+    <rect x="20.0" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="88.8" y="61.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">API requirements</text>
+  </g>
+  <line x1="157.5" y1="58.0" x2="181.5" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="187.5" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#D9D9D9" stroke="#000000" stroke-width="1.2"/>
+    <text x="256.2" y="49.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">AI-assisted API</text>
+    <text x="256.2" y="61.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">+ documentation</text>
+    <text x="256.2" y="73.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">generation</text>
+  </g>
+  <line x1="325.0" y1="58.0" x2="349.0" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="355.0" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="423.8" y="49.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Mongoose Product</text>
+    <text x="423.8" y="61.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">model + seed</text>
+    <text x="423.8" y="73.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">data</text>
+  </g>
+  <line x1="492.5" y1="58.0" x2="516.5" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="522.5" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="591.2" y="49.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Express router</text>
+    <text x="591.2" y="61.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">with REST</text>
+    <text x="591.2" y="73.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">semantics</text>
+  </g>
+  <line x1="50.0" y1="81.0" x2="50.0" y2="116.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="20.0" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="88.8" y="140.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">OpenAPI 3.0 spec</text>
+    <text x="88.8" y="152.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">-> Swagger UI</text>
+  </g>
+  <line x1="157.5" y1="143.0" x2="181.5" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="187.5" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="256.2" y="134.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Postman</text>
+    <text x="256.2" y="146.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">collection +</text>
+    <text x="256.2" y="158.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">environment</text>
+  </g>
+  <line x1="325.0" y1="143.0" x2="349.0" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="355.0" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="423.8" y="134.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Testing every</text>
+    <text x="423.8" y="146.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">endpoint and</text>
+    <text x="423.8" y="158.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">error case</text>
+  </g>
+  <line x1="492.5" y1="143.0" x2="516.5" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="522.5" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+    <text x="591.2" y="134.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">Documented,</text>
+    <text x="591.2" y="146.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">testable REST</text>
+    <text x="591.2" y="158.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">API</text>
+  </g>
+  <text x="340.0" y="228.0" font-size="9" font-style="italic" fill="#000000" text-anchor="middle">Shaded boxes are the steps where AI was used.</text>
+</svg>

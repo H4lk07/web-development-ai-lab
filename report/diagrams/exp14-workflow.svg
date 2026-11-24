@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%" style="background-color: #ffffff; font-family: Calibri, -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <g>
+    <rect x="92.5" y="35.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="165.0" y="55.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Quality</text>
+    <text x="165.0" y="67.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">requirements</text>
+  </g>
+  <line x1="237.5" y1="58.0" x2="261.5" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="267.5" y="35.0" width="145.0" height="46" rx="3" ry="3" fill="#D9D9D9" stroke="#000000" stroke-width="1.2"/>
+    <text x="340.0" y="55.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">AI-assisted test</text>
+    <text x="340.0" y="67.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">plan</text>
+  </g>
+  <line x1="412.5" y1="58.0" x2="436.5" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="442.5" y="35.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="515.0" y="55.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Test</text>
+    <text x="515.0" y="67.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">implementation</text>
+  </g>
+  <line x1="122.5" y1="81.0" x2="122.5" y2="116.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="92.5" y="120.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="165.0" y="140.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Run tests -></text>
+    <text x="165.0" y="152.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">collect failures</text>
+  </g>
+  <line x1="237.5" y1="143.0" x2="261.5" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="267.5" y="120.0" width="145.0" height="46" rx="3" ry="3" fill="#D9D9D9" stroke="#000000" stroke-width="1.2"/>
+    <text x="340.0" y="140.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">AI-assisted</text>
+    <text x="340.0" y="152.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">debugging</text>
+  </g>
+  <line x1="412.5" y1="143.0" x2="436.5" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="442.5" y="120.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="515.0" y="140.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Performance</text>
+    <text x="515.0" y="152.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">profiling</text>
+  </g>
+  <line x1="122.5" y1="166.0" x2="122.5" y2="201.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="92.5" y="205.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="165.0" y="225.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Security</text>
+    <text x="165.0" y="237.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">analysis</text>
+  </g>
+  <line x1="237.5" y1="228.0" x2="261.5" y2="228.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="267.5" y="205.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="340.0" y="219.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Re-test,</text>
+    <text x="340.0" y="231.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">re-measure,</text>
+    <text x="340.0" y="243.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">document before/after</text>
+  </g>
+  <line x1="412.5" y1="228.0" x2="436.5" y2="228.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="442.5" y="205.0" width="145.0" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+    <text x="515.0" y="219.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">Verified,</text>
+    <text x="515.0" y="231.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">hardened</text>
+    <text x="515.0" y="243.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">application</text>
+  </g>
+  <text x="340.0" y="308.0" font-size="9" font-style="italic" fill="#000000" text-anchor="middle">Shaded boxes are the steps where AI was used.</text>
+</svg>

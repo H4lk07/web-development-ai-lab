@@ -1,0 +1,17 @@
+{
+  "studentName": "Mayank Goyal",
+  "university": "JECRC University",
+  "collegeLogo": "report/reference/jecrc_logo.png",
+  "rollNumber": "23BCON1662",
+  "enrollmentNumber": "23BCON1662",
+  "course": "Bachelor of Technology (B.Tech)",
+  "branch": "Computer Science and Engineering (CSE)",
+  "section": "P",
+  "semester": "7th",
+  "subjectName": "Web Development Using AI",
+  "subjectCode": "BCO682A",
+  "submittedTo": "Mr. Mohit Parashar",
+  "academicSession": "2026–27",
+  "aiTool": "Antigravity",
+  "preferredAIProvider": "Gemini / OpenAI"
+}

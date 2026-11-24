@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "Web Development Using AI - Exp 7 Products REST API",
+    "description": "Postman test suite for Product Catalog RESTful API (CRUD, Search, Filtering, Pagination, Error Handling)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "02 List Products (All)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?page=1&limit=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "10" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "03 Filter Products by Category",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?category=electronics",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [{ "key": "category", "value": "electronics" }]
+        }
+      }
+    },
+    {
+      "name": "04 Create Product (Success)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Acoustic Wireless Headphones\",\n  \"description\": \"Active noise cancellation with 40-hour battery life\",\n  \"category\": \"electronics\",\n  \"price\": 149.99,\n  \"quantity\": 20,\n  \"inStock\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"]
+        }
+      }
+    },
+    {
+      "name": "05 Create Product (Validation Failure)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"category\": \"invalid_category\",\n  \"price\": -20\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"]
+        }
+      }
+    },
+    {
+      "name": "06 Get Product by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products/prod_1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "prod_1"]
+        }
+      }
+    },
+    {
+      "name": "07 Update Product (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Tidewave Desk Lamp Pro\",\n  \"description\": \"Updated LED Lamp with dual USB-C ports\",\n  \"category\": \"home\",\n  \"price\": 59.99,\n  \"quantity\": 15,\n  \"inStock\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/prod_1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "prod_1"]
+        }
+      }
+    },
+    {
+      "name": "08 Partial Update Product (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 44.99\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/prod_1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "prod_1"]
+        }
+      }
+    },
+    {
+      "name": "09 Delete Product (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products/prod_4",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "prod_4"]
+        }
+      }
+    },
+    {
+      "name": "10 Get Non-Existent Product (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products/non_existent_999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "non_existent_999"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 240" width="100%" height="100%" style="background-color: #ffffff; font-family: Calibri, -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <g>
+    <rect x="20.0" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="88.8" y="55.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Content and page</text>
+    <text x="88.8" y="67.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">requirements</text>
+  </g>
+  <line x1="157.5" y1="58.0" x2="181.5" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="187.5" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#D9D9D9" stroke="#000000" stroke-width="1.2"/>
+    <text x="256.2" y="55.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">AI-assisted</text>
+    <text x="256.2" y="67.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">development plan</text>
+  </g>
+  <line x1="325.0" y1="58.0" x2="349.0" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="355.0" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="423.8" y="49.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Shared layout:</text>
+    <text x="423.8" y="61.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">sticky</text>
+    <text x="423.8" y="73.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">navigation + footer</text>
+  </g>
+  <line x1="492.5" y1="58.0" x2="516.5" y2="58.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="522.5" y="35.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="591.2" y="61.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Page components</text>
+  </g>
+  <line x1="50.0" y1="81.0" x2="50.0" y2="116.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="20.0" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="88.8" y="134.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Form components</text>
+    <text x="88.8" y="146.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">+ shared</text>
+    <text x="88.8" y="158.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">validation module</text>
+  </g>
+  <line x1="157.5" y1="143.0" x2="181.5" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="187.5" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="256.2" y="134.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Responsive</text>
+    <text x="256.2" y="146.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">styling and</text>
+    <text x="256.2" y="158.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">accessibility pass</text>
+  </g>
+  <line x1="325.0" y1="143.0" x2="349.0" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="355.0" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"/>
+    <text x="423.8" y="146.0" font-size="10" font-weight="normal" fill="#000000" text-anchor="middle">Testing</text>
+  </g>
+  <line x1="492.5" y1="143.0" x2="516.5" y2="143.0" stroke="#000000" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="522.5" y="120.0" width="137.5" height="46" rx="3" ry="3" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+    <text x="591.2" y="140.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">Final multi-page</text>
+    <text x="591.2" y="152.0" font-size="10" font-weight="bold" fill="#000000" text-anchor="middle">website</text>
+  </g>
+  <text x="340.0" y="228.0" font-size="9" font-style="italic" fill="#000000" text-anchor="middle">Shaded boxes are the steps where AI was used.</text>
+</svg>
