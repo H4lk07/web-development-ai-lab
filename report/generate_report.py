@@ -4,7 +4,7 @@ import docx
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
+from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import nsdecls, qn
 import win32com.client
@@ -55,7 +55,7 @@ def add_page_number_to_footer(footer_p):
     run._r.append(fldChar3)
 
 def generate_report():
-    print("[Report] Starting academic lab record document generation...")
+    print("[Report] Starting academic lab record document generation (spacious multi-view layout)...")
     
     with open("report/student-details.json", "r", encoding="utf-8") as f:
         student = json.load(f)
@@ -141,6 +141,7 @@ def generate_report():
     run_by_body = p_by.add_run(
         f"Name: {student.get('studentName', 'Mayank Goyal')}\n"
         f"Roll No: {student.get('rollNumber', '23BCON1662')}\n"
+        f"Email: {student.get('email', 'mayank.23bcon1662@jecrcu.edu.in')}\n"
         f"Section: {student.get('section', 'P')}\n"
         f"Semester: {student.get('semester', '7th')}\n"
     )
@@ -168,6 +169,21 @@ def generate_report():
     footer2 = section2.footer
     p_footer = footer2.paragraphs[0]
     add_page_number_to_footer(p_footer)
+
+    # Calculate starting page numbers dynamically for all experiments
+    # Physical Page 1: Cover (no footer)
+    # Physical Page 2: Index (Printed footer 1)
+    # Experiments start at Printed footer 2
+    exp_page_numbers = {}
+    curr_printed_page = 2
+    for exp in experiments:
+        exp_page_numbers[exp["id"]] = curr_printed_page
+        num_sc = len(exp.get("screenshots", []))
+        # 1 page for Aim/Tools/Workflow/Proc + 1 page per screenshot view
+        # For 2 screenshots: 1 + 2 = 3 pages
+        # For 3 screenshots: 1 + 3 = 4 pages
+        exp_pages = 1 + max(num_sc, 1)
+        curr_printed_page += exp_pages
 
     # =========================================================================
     # PAGE 2: INDEX PAGE (Printed Page 1)
@@ -200,7 +216,6 @@ def generate_report():
         run.font.size = Pt(10)
 
     # 15 Experiment Rows
-    # In reference: Exp 1 is page 2, Exp 2 is page 4, ..., Exp 15 is page 30
     for i, exp in enumerate(experiments, start=1):
         row_cells = index_table.rows[i].cells
         for c_i in range(3):
@@ -220,24 +235,26 @@ def generate_report():
         r1 = p1.add_run(exp["aim"])
         r1.font.size = Pt(9.5)
 
-        # Page Number
+        # Page Number (Dynamically verified)
         p2 = row_cells[2].paragraphs[0]
         p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        page_num = 2 + (i - 1) * 2
+        page_num = exp_page_numbers[exp["id"]]
         r2 = p2.add_run(str(page_num))
         r2.font.size = Pt(9.5)
 
     doc.add_page_break()
 
     # =========================================================================
-    # EXPERIMENTS 1 TO 15 (Physical Pages 3 to 32, Printed Pages 2 to 31)
+    # EXPERIMENTS 1 TO 15 (SPACIOUS MULTI-VIEW PRESENTATION)
     # =========================================================================
     for exp_idx, exp in enumerate(experiments):
         eid = exp["id"]
-        print(f"[Report] Formatting Experiment {eid}: {exp['title']}...")
+        sc_list = exp.get("screenshots", [])
+        num_sc = len(sc_list)
+        print(f"[Report] Formatting Experiment {eid}: {exp['title']} ({num_sc} views)...")
 
         # ---------------------------------------------------------------------
-        # FIRST PAGE OF EXPERIMENT
+        # FIRST PAGE OF EXPERIMENT (Aim, Tools, Workflow Diagram, Procedure Table)
         # ---------------------------------------------------------------------
         p_exp_title = doc.add_paragraph()
         p_exp_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -275,7 +292,7 @@ def generate_report():
         p_tools.paragraph_format.line_spacing = 1.15
         r_tech = p_tools.add_run(f"Technology: {exp['tech']}\n")
         r_tech.font.size = Pt(10)
-        r_ai = p_tools.add_run(f"AI tool: {exp.get('aiTool', 'Antigravity')}")
+        r_ai = p_tools.add_run(f"AI tool: {exp.get('aiTool', student.get('aiTool', 'Google Gemini & GitHub Copilot'))}")
         r_ai.font.size = Pt(10)
 
         # N.3 Architecture / Workflow
@@ -292,8 +309,7 @@ def generate_report():
             p_diag = doc.add_paragraph()
             p_diag.alignment = WD_ALIGN_PARAGRAPH.CENTER
             p_diag.paragraph_format.space_before = Pt(0)
-            p_diag.paragraph_format.space_after = Pt(10)
-            # Scaled height to fit cleanly
+            p_diag.paragraph_format.space_after = Pt(8)
             p_diag.add_run().add_picture(png_diagram, width=Inches(6.2))
 
         # N.4 Procedure
@@ -349,9 +365,8 @@ def generate_report():
         doc.add_page_break()
 
         # ---------------------------------------------------------------------
-        # SECOND PAGE OF EXPERIMENT
+        # PAGE 2 OF EXPERIMENT: AI Prompt Used + View 1 Screenshot
         # ---------------------------------------------------------------------
-        # N.5 AI Prompt Used
         p_prompt_hdr = doc.add_paragraph()
         p_prompt_hdr.paragraph_format.space_before = Pt(0)
         p_prompt_hdr.paragraph_format.space_after = Pt(2)
@@ -359,73 +374,115 @@ def generate_report():
         r_prh.font.size = Pt(11)
         r_prh.font.bold = True
 
-        # AI Prompt Table Box (Consolas, light grey background, single cell)
+        # AI Prompt Box
         prompt_table = doc.add_table(rows=1, cols=1)
         prompt_table.alignment = WD_TABLE_ALIGNMENT.CENTER
         p_cell = prompt_table.cell(0, 0)
         p_cell.width = Inches(6.5)
         set_cell_shading(p_cell, "F2F4F7")
-        set_cell_margins(p_cell, top=70, bottom=70, left=90, right=90)
+        set_cell_margins(p_cell, top=60, bottom=60, left=90, right=90)
         set_table_borders(prompt_table, color="000000", sz="4")
 
         p_box = p_cell.paragraphs[0]
         p_box.paragraph_format.space_after = Pt(0)
         p_box.paragraph_format.line_spacing = 1.05
         
-        # Faithful concise excerpt to guarantee fitting on page
         prompt_lines = exp["prompt"].strip().split("\n")
-        # Keep within ~25 lines to prevent overflowing
-        trimmed_prompt = "\n".join(prompt_lines[:24])
+        trimmed_prompt = "\n".join(prompt_lines[:18])
         r_pbox = p_box.add_run(trimmed_prompt)
         r_pbox.font.name = 'Consolas'
         r_pbox.font.size = Pt(8.5)
         r_pbox.font.color.rgb = RGBColor(15, 23, 42)
 
-        # N.6 Output
+        # Output Heading
         p_out_hdr = doc.add_paragraph()
-        p_out_hdr.paragraph_format.space_before = Pt(6)
-        p_out_hdr.paragraph_format.space_after = Pt(3)
-        if eid == 15:
-            r_oh = p_out_hdr.add_run(f"15.6 Output - https://lab-webdev-ai.vercel.app/")
-        else:
-            r_oh = p_out_hdr.add_run(f"{eid}.6 Output")
+        p_out_hdr.paragraph_format.space_before = Pt(8)
+        p_out_hdr.paragraph_format.space_after = Pt(2)
+        r_oh = p_out_hdr.add_run(f"{eid}.6 Output")
         r_oh.font.size = Pt(11)
         r_oh.font.bold = True
 
-        # Screenshots
-        screenshots = exp.get("screenshots", [])
-        if len(screenshots) == 1:
-            p_img = doc.add_paragraph()
-            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p_img.paragraph_format.space_before = Pt(0)
-            p_img.paragraph_format.space_after = Pt(4)
-            if os.path.exists(screenshots[0]):
-                p_img.add_run().add_picture(screenshots[0], width=Inches(6.0))
-        elif len(screenshots) >= 2:
-            # Stacked two screenshots (Exp 13, Exp 15)
-            for sc in screenshots[:2]:
-                if os.path.exists(sc):
-                    p_img = doc.add_paragraph()
-                    p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                    p_img.paragraph_format.space_before = Pt(0)
-                    p_img.paragraph_format.space_after = Pt(3)
-                    p_img.add_run().add_picture(sc, width=Inches(5.8), height=Inches(1.75))
+        # View 1 Heading & Full Screenshot
+        sc1 = sc_list[0] if num_sc > 0 else None
+        if sc1:
+            sc1_file = sc1.get("file", sc1) if isinstance(sc1, dict) else sc1
+            sc1_title = sc1.get("title", "Home Page") if isinstance(sc1, dict) else "Home Page"
+            sc1_cap = sc1.get("caption", f"Figure {eid}.1: {sc1_title}.") if isinstance(sc1, dict) else f"Figure {eid}.1: Application interface."
 
-        # N.7 Conclusion
-        p_concl_hdr = doc.add_paragraph()
-        p_concl_hdr.paragraph_format.space_before = Pt(4)
-        p_concl_hdr.paragraph_format.space_after = Pt(1)
-        r_ch = p_concl_hdr.add_run(f"{eid}.7 Conclusion")
-        r_ch.font.size = Pt(11)
-        r_ch.font.bold = True
+            p_v1_hdr = doc.add_paragraph()
+            p_v1_hdr.paragraph_format.space_before = Pt(2)
+            p_v1_hdr.paragraph_format.space_after = Pt(2)
+            r_v1 = p_v1_hdr.add_run(f"1. {sc1_title}")
+            r_v1.font.size = Pt(10.5)
+            r_v1.font.bold = True
 
-        p_concl = doc.add_paragraph()
-        p_concl.paragraph_format.space_after = Pt(0)
-        p_concl.paragraph_format.line_spacing = 1.15
-        r_c = p_concl.add_run(exp["conclusion"])
-        r_c.font.size = Pt(10)
+            if os.path.exists(sc1_file):
+                p_img1 = doc.add_paragraph()
+                p_img1.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_img1.paragraph_format.space_before = Pt(2)
+                p_img1.paragraph_format.space_after = Pt(2)
+                p_img1.add_run().add_picture(sc1_file, width=Inches(6.2))
 
-        # Page break except after last page
+                p_cap1 = doc.add_paragraph()
+                p_cap1.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_cap1.paragraph_format.space_before = Pt(0)
+                p_cap1.paragraph_format.space_after = Pt(0)
+                r_c1 = p_cap1.add_run(sc1_cap)
+                r_c1.font.name = 'Calibri'
+                r_c1.font.size = Pt(8.5)
+                r_c1.font.italic = True
+                r_c1.font.color.rgb = RGBColor(70, 80, 95)
+
+        # ---------------------------------------------------------------------
+        # SUBSEQUENT OUTPUT PAGES (VIEW 2, VIEW 3, ... + CONCLUSION)
+        # ---------------------------------------------------------------------
+        for sc_idx in range(1, num_sc):
+            doc.add_page_break()
+            sc = sc_list[sc_idx]
+            sc_file = sc.get("file", sc) if isinstance(sc, dict) else sc
+            sc_title = sc.get("title", f"Module View {sc_idx+1}") if isinstance(sc, dict) else f"Module View {sc_idx+1}"
+            sc_cap = sc.get("caption", f"Figure {eid}.{sc_idx+1}: {sc_title}.") if isinstance(sc, dict) else f"Figure {eid}.{sc_idx+1}: Output view."
+
+            p_v_hdr = doc.add_paragraph()
+            p_v_hdr.paragraph_format.space_before = Pt(0)
+            p_v_hdr.paragraph_format.space_after = Pt(3)
+            r_v = p_v_hdr.add_run(f"{sc_idx+1}. {sc_title}")
+            r_v.font.size = Pt(10.5)
+            r_v.font.bold = True
+
+            if os.path.exists(sc_file):
+                p_img = doc.add_paragraph()
+                p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_img.paragraph_format.space_before = Pt(2)
+                p_img.paragraph_format.space_after = Pt(3)
+                p_img.add_run().add_picture(sc_file, width=Inches(6.2))
+
+                p_cap = doc.add_paragraph()
+                p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_cap.paragraph_format.space_before = Pt(0)
+                p_cap.paragraph_format.space_after = Pt(6)
+                r_c = p_cap.add_run(sc_cap)
+                r_c.font.name = 'Calibri'
+                r_c.font.size = Pt(8.5)
+                r_c.font.italic = True
+                r_c.font.color.rgb = RGBColor(70, 80, 95)
+
+            # If this is the last screenshot of the experiment, append the Conclusion
+            if sc_idx == num_sc - 1:
+                p_concl_hdr = doc.add_paragraph()
+                p_concl_hdr.paragraph_format.space_before = Pt(8)
+                p_concl_hdr.paragraph_format.space_after = Pt(2)
+                r_ch = p_concl_hdr.add_run(f"{eid}.7 Conclusion")
+                r_ch.font.size = Pt(11)
+                r_ch.font.bold = True
+
+                p_concl = doc.add_paragraph()
+                p_concl.paragraph_format.space_after = Pt(0)
+                p_concl.paragraph_format.line_spacing = 1.15
+                r_c = p_concl.add_run(exp["conclusion"])
+                r_c.font.size = Pt(10)
+
+        # Page break except after last experiment
         if exp_idx < len(experiments) - 1:
             doc.add_page_break()
 

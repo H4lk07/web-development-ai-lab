@@ -38,7 +38,16 @@
     ],
     "prompt": "You are a senior front-end engineer and UI designer. Build a responsive personal portfolio as a single page for Mayank Goyal (JECRC University).\n\nSTYLE\n- Theme: modern slate dark theme with indigo/purple accents and radial glow.\n- Foreground: glassy white translucent panels, rounded 2xl corners, subtle borders.\n- Navigation: clean header navigation with jump links and college lab badge.\n\nCONTENT SECTIONS\n1. Hero \u2014 availability pill, name (Mayank Goyal), role, short tagline, primary CTA.\n2. Projects \u2014 responsive card grid, each card with title, description, tag badges and demo link.\n3. About \u2014 academic background at JECRC University, competencies, milestone cards.\n4. Skills \u2014 4-column categorization: Frontend, Backend, Database, AI/DevOps.\n5. Contact \u2014 two-column layout with contact details and a form (name, email, message) that shows a success message on submit.\n\nENGINEERING RULES\n- Semantic HTML5 landmarks; one <h1> per page.\n- Mobile-first responsive breakpoints at 640 / 768 / 1024 px.\n- All interactive elements reachable by keyboard with visible focus.\n- Form validation for required fields, valid email format, and minimum message length.\n- Return production-ready, commented React code with no placeholder lorem ipsum.",
     "screenshots": [
-      "report/screenshots/exp01.png"
+      {
+        "file": "report/screenshots/exp01-1.png",
+        "title": "Home Page & Hero Section",
+        "caption": "Figure 1.1: Responsive portfolio home page and hero section."
+      },
+      {
+        "file": "report/screenshots/exp01-2.png",
+        "title": "Featured Projects & Skills",
+        "caption": "Figure 1.2: Technical competencies and featured projects catalog."
+      }
     ],
     "conclusion": "A responsive personal portfolio website was built with AI assistance on architecture planning. The navigation, semantic landmarks, project grid, and client-side contact validation functioned properly across mobile, tablet, and desktop viewports."
   },
@@ -81,7 +90,16 @@
     ],
     "prompt": "Act as a product designer and Bootstrap 5 specialist. Create a responsive landing page for a fictional B2B analytics startup called \"AuraMetrics AI\".\n\nSTRUCTURE (in this order)\n1. Sticky dark navbar \u2014 brand, links to Features / Telemetry / Pricing / Reviews, primary \"Start Free Trial\" button, collapses to hamburger below lg.\n2. Hero \u2014 dark navy to blue gradient, headline, sub-headline, two CTAs and a mock dashboard visual made from simple divs (no external images).\n3. Stats strip \u2014 four headline numbers (4.2B events, 2,100+ teams, 312ms latency, 99.99% uptime).\n4. Features \u2014 six cards in a 3/2/1 responsive grid, each with an icon, title and description.\n5. Pricing \u2014 three tiers (Starter, Pro, Enterprise), middle tier highlighted with a \"Most Popular\" badge.\n6. Testimonials \u2014 interactive carousel with three client quotes.\n7. Final CTA band and clean footer.\n\nRULES\n- Use Bootstrap classes and conventions for layout and components.\n- Mobile-first; verify at 375 / 768 / 992 / 1440 px.\n- Accessible: aria-labels on controls, sufficient contrast on gradient hero.\n- Provide realistic telemetry copy, not lorem ipsum.",
     "screenshots": [
-      "report/screenshots/exp02.png"
+      {
+        "file": "report/screenshots/exp02-1.png",
+        "title": "Home Page & Hero Section",
+        "caption": "Figure 2.1: Bootstrap startup landing page hero section and telemetry."
+      },
+      {
+        "file": "report/screenshots/exp02-2.png",
+        "title": "Pricing Plans & Reviews",
+        "caption": "Figure 2.2: Tiered subscription pricing cards and client testimonials."
+      }
     ],
     "conclusion": "A responsive startup landing page for AuraMetrics AI was built using Bootstrap layout grids and components with custom CSS accents. The collapsible navbar, testimonial rotation, and pricing cards behaved reliably at all screen breakpoints."
   },
@@ -124,7 +142,16 @@
     ],
     "prompt": "You are a JavaScript instructor. Build an interactive \"DOM Lab\" page where core behaviours demonstrate direct DOM manipulation principles.\n\nWIDGETS\n1. Live clock + time-based greeting (setInterval -> textContent).\n2. Light/dark theme toggle (setAttribute / class toggle -> CSS variables).\n3. Project filter (event delegation -> classList toggling).\n4. Live search that filters cards as the user types.\n5. Click counter with increment, decrement, and reset.\n6. Progress bar animated with requestAnimationFrame.\n7. Accessible modal (open/close, Esc key, backdrop click).\n8. Accordion with aria-expanded attributes.\n9. Newsletter form with inline validation messages.\n\nRULES\n- Clean event binding and state reflection.\n- Every listener, interval and animation frame must be cleaned up on unmount.\n- Provide a light and a dark theme using CSS custom properties.\n- Annotate each block with the exact DOM API it illustrates.",
     "screenshots": [
-      "report/screenshots/exp03.png"
+      {
+        "file": "report/screenshots/exp03-1.png",
+        "title": "Interactive DOM Dashboard",
+        "caption": "Figure 3.1: Live digital clock, greetings, and dynamic DOM counter."
+      },
+      {
+        "file": "report/screenshots/exp03-2.png",
+        "title": "Filtered Search & Modal Controls",
+        "caption": "Figure 3.2: Real-time search filter and interactive modal dialog."
+      }
     ],
     "conclusion": "An interactive DOM manipulation workbench was developed using native JavaScript APIs including setInterval, requestAnimationFrame, and event delegation. All dynamic controls, live filtering, and modal dialogs executed without layout shifts or memory leaks."
   },
@@ -167,7 +194,21 @@
     ],
     "prompt": "Build a four-page marketing website for a fictional design studio, \"Bluepeak Studio\", using Next.js App Router and Tailwind CSS.\n\nPAGES\n- /exp4 Home: hero, three service preview cards, CTA.\n- /exp4/about About: studio story, four core values.\n- /exp4/services Services: six service cards with \"from\" pricing tiers.\n- /exp4/contact Contact: studio details, FAQ, full contact form.\n\nSHARED SHELL\n- Sticky top navigation with Home / About / Services / Contact, active-link highlighting.\n- Footer with a compact newsletter signup form.\n\nFORMS & VALIDATION\n- Contact fields: name, email, phone (optional), subject (select), message.\n- Validate on submit: required fields, email regex, phone regex, message length. Show clear field errors with role=\"alert\".\n- Newsletter: single email field, reuse same email validator.\n- Put all validation logic in a shared pure module so it can be unit-tested.\n\nQUALITY\n- Mobile-first responsive grids, visible focus states, client-side validation only.",
     "screenshots": [
-      "report/screenshots/exp04.png"
+      {
+        "file": "report/screenshots/exp04-1.png",
+        "title": "Home Page",
+        "caption": "Figure 4.1: Multi-page enterprise website public landing page."
+      },
+      {
+        "file": "report/screenshots/exp04-2.png",
+        "title": "Services Page",
+        "caption": "Figure 4.2: Specialized engineering services and enterprise capabilities."
+      },
+      {
+        "file": "report/screenshots/exp04-3.png",
+        "title": "Contact & Inquiries Page",
+        "caption": "Figure 4.3: Interactive client inquiry form with input validation."
+      }
     ],
     "conclusion": "A multi-page corporate website for Bluepeak Studio was built with shared navigation and pure validation modules. Active link highlighting, accessible form error states, and responsive viewports were fully verified."
   },
@@ -210,7 +251,16 @@
     ],
     "prompt": "You are a backend engineer. Generate a complete CRUD application for a task manager using Node.js, Express.js and MongoDB (Mongoose), plus a React UI.\n\nDATA MODEL \u2014 Task\n- title: string, required, trimmed, max 120 chars\n- description: string, default \"\", max 1000 chars\n- priority: \"low\" | \"medium\" | \"high\", default \"medium\"\n- done: boolean, default false\n- timestamps: true\n\nAPI (mounted at /api/tasks)\n- GET / list with ?search=&done=&sort=&page=&limit=\n- GET /:id read one, 404 when missing\n- POST / create, 201 + Location header; validation failure -> 400\n- PUT /:id full update\n- PATCH /:id partial update\n- DELETE /:id 204 No Content\n\nQUALITY & UI\n- Central error handler for validation and bad IDs.\n- Enable CORS and JSON body parsing.\n- UI: create form, list with priority badges, done checkbox, search box, filter buttons, and live API status badge.",
     "screenshots": [
-      "report/screenshots/exp05.png"
+      {
+        "file": "report/screenshots/exp05-1.png",
+        "title": "Home Page (Product & Task Catalog)",
+        "caption": "Figure 5.1: Database-driven CRUD catalog displaying active records."
+      },
+      {
+        "file": "report/screenshots/exp05-2.png",
+        "title": "Adding & Editing Items",
+        "caption": "Figure 5.2: Modal interface for creating and updating catalog records."
+      }
     ],
     "conclusion": "A persistent CRUD task manager was implemented using Express.js and MongoDB. Create, read, update, patch, and delete operations were verified through both the UI and automated HTTP tests, returning standard REST status codes."
   },
@@ -253,7 +303,16 @@
     ],
     "prompt": "Implement authentication and authorization for an Express.js + MongoDB API.\n\nMODEL \u2014 User\n- name: required, max 60\n- email: required, unique, lowercase, validated\n- passwordHash: required, select: false\n- role: \"user\" | \"admin\", default \"user\"\n- timestamps\n\nROUTES\n- POST /api/auth/register { name, email, password, role } -> hash with bcrypt, return 201 { user, token }\n- POST /api/auth/login { email, password } -> compare hash, return { user, token }; invalid credentials -> 401\n- GET /api/auth/me -> requires valid Bearer token\n- GET /api/users -> admin only; non-admin receives 403 Forbidden\n\nSECURITY RULES\n- Passwords only stored as bcrypt hashes (cost 10).\n- JWT signed with JWT_SECRET, expires in 2h.\n- Never expose passwordHash in API responses.\n- Seed demo accounts on boot for demonstration.\n\nUI\n- Login / Register tabs, inline field errors, Bearer token stored in state, profile panel, and admin user table.",
     "screenshots": [
-      "report/screenshots/exp06.png"
+      {
+        "file": "report/screenshots/exp06-1.png",
+        "title": "Registration Page",
+        "caption": "Figure 6.1: Secure user registration with bcrypt password encryption."
+      },
+      {
+        "file": "report/screenshots/exp06-2.png",
+        "title": "Login Page & Role-Protected Session",
+        "caption": "Figure 6.2: Authenticated session state and role-based user management."
+      }
     ],
     "conclusion": "User registration, bcrypt password hashing, JWT token authentication, and role-based route authorization were successfully deployed. Protected routes correctly authenticated admin tokens while returning 401 and 403 status codes for invalid credentials."
   },
@@ -296,7 +355,16 @@
     ],
     "prompt": "Design and document a RESTful API for a product catalogue.\n\nRESOURCE \u2014 Product\n- name (required, max 120), description (max 2000)\n- category: electronics | apparel | books | home (required)\n- price: required, >= 0; quantity: >= 0, default 0; inStock: boolean, default true\n\nENDPOINTS (base /api/products)\n- GET / ?category=&inStock=&search=&page=&limit=&sort=\n- GET /:id -> 200 or 404\n- POST / -> 201 + Location header; validation failure -> 400\n- PUT /:id -> full replace\n- PATCH /:id -> partial update\n- DELETE /:id -> 204 No Content\n\nDOCUMENTATION & TESTING\n- Produce a complete OpenAPI 3.0.3 document with schemas, parameters, and responses.\n- Serve Swagger UI at /api-docs and raw spec at /api/openapi.json.\n- Generate a Postman collection (v2.1) with 10 dependency-ordered requests and environment file.\n- Provide a Postman-like live workbench in the UI to send requests and inspect headers and response JSON.",
     "screenshots": [
-      "report/screenshots/exp07.png"
+      {
+        "file": "report/screenshots/exp07-1.png",
+        "title": "API Testing Execution (/api/tasks)",
+        "caption": "Figure 7.1: RESTful API test suite execution with HTTP status validation."
+      },
+      {
+        "file": "report/screenshots/exp07-2.png",
+        "title": "API Documentation & Schema",
+        "caption": "Figure 7.2: Interactive Swagger / OpenAPI documentation endpoint."
+      }
     ],
     "conclusion": "A product catalog RESTful API was developed and documented with OpenAPI 3.0 and Swagger UI. An automated 10-request Postman test collection verified endpoint reliability, pagination, query filtering, and error handling."
   },
@@ -339,7 +407,16 @@
     ],
     "prompt": "Build a Student Management System with Express.js and MongoDB, then debug and optimise it.\n\nMODEL \u2014 Student\n- name: required, max 80\n- rollNo: required, unique, uppercase (e.g. 23BCON1662)\n- email: required, unique, lowercase, validated\n- course: CSE | ECE | ME | CE\n- year: integer 1\u20134; gpa: number 0\u201310; timestamps\n- compound index on (course, gpa); seed demo students idempotently\n\nENDPOINTS (base /api/students)\n- GET / ?search=&course=&page=&limit=&sort=\n- GET /stats -> total students, per-course count and average GPA (aggregation pipeline)\n- GET /:id, POST / (201), PUT /:id, DELETE /:id (204)\n\nDEBUGGING & OPTIMIZATION TASKS\n1. Register /stats before /:id to prevent route shadowing.\n2. Catch duplicate rollNo/email and return clean 409 Conflict errors.\n3. Use .lean() on read queries for fast serialization.\n4. Cap pagination query limit at 100.\n5. Create UI with summary statistics cards, search bar, course filter chips, and add student modal.",
     "screenshots": [
-      "report/screenshots/exp08.png"
+      {
+        "file": "report/screenshots/exp08-1.png",
+        "title": "Student Directory & Academic Overview",
+        "caption": "Figure 8.1: Student management dashboard and academic statistics."
+      },
+      {
+        "file": "report/screenshots/exp08-2.png",
+        "title": "Student Registration & Management",
+        "caption": "Figure 8.2: Student admission form modal and database record operations."
+      }
     ],
     "conclusion": "A database-driven student management system was developed, debugged, and optimized with AI assistance. Unique index enforcement, route shadow remediation, and MongoDB aggregation pipelines for GPA analytics were verified."
   },
@@ -382,7 +459,16 @@
     ],
     "prompt": "Integrate OpenAI and Gemini text generation into a web application via an Express backend proxy.\n\nSERVER ARCHITECTURE (Express.js, no client-side keys)\n- Shared provider abstraction in server/lib/ai.js:\n  * Gemini -> POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent\n  * OpenAI -> POST https://api.openai.com/v1/chat/completions\n  * Demo -> deterministic structured output when keys are unconfigured\n- Return { text, provider, model, demo, mode }.\n\nENDPOINT \u2014 POST /api/generate\n- Body: { prompt, mode, provider, maxTokens }\n- Supported modes with specialized system prompts:\n  * freeform: concise, helpful assistant\n  * summarize: 3-5 bullet points preserving key facts\n  * rewrite: polished, professional, clear tone\n  * brainstorm: 5 actionable ideas with one-line rationale\n  * explain: simple analogy under 150 words\n- Validate: prompt 4\u20134000 chars, mode whitelisted.\n\nUI\n- Mode tabs, prompt textarea, character counter, token slider, generate button with loading state, copy button, and session history.",
     "screenshots": [
-      "report/screenshots/exp09.png"
+      {
+        "file": "report/screenshots/exp09-1.png",
+        "title": "AI Text Studio Interface",
+        "caption": "Figure 9.1: Generative AI text synthesis form with prompt controls."
+      },
+      {
+        "file": "report/screenshots/exp09-2.png",
+        "title": "Sample AI Generation Output",
+        "caption": "Figure 9.2: Real-time generated AI response stream and export controls."
+      }
     ],
     "conclusion": "An AI Text Studio was integrated with Google Gemini and OpenAI through a secure Express backend proxy. All five generation modes (freeform, summarize, rewrite, brainstorm, explain) operated with isolated API credentials and instant fallback resiliency."
   },
@@ -425,7 +511,16 @@
     ],
     "prompt": "Build an AI chatbot for the JECRC University website.\n\nPERSONA / SYSTEM PROMPT\n\"You are the friendly, intelligent Virtual Helpdesk Assistant for JECRC University.\nHelp students and visitors with admissions, B.Tech CSE / ECE / ME courses, hostel facilities, placements, and contact details. Keep answers under 120 words, use plain language, be warm and professional. Never invent exact exam dates or fees.\"\n\nAPI (mounted at /api/chat)\n- POST /api/chat { message, sessionId?, provider? } -> { reply, sessionId, provider, demo }\n- DELETE /api/chat/:sessionId -> 204, clears history\n- GET /api/chat/config -> active provider, demo flag, and suggested questions\n\nBEHAVIOUR & MEMORY\n- Generate a unique sessionId when not provided.\n- Store last 12 messages per session in memory so follow-up contextual questions work.\n- Provide a robust FAQ fallback responding to admissions, placements, and hostel inquiries.\n\nUI\n- Chat bubbles, typing indicator, four clickable question chips, auto-scroll to bottom, reset conversation button, and active status indicator.",
     "screenshots": [
-      "report/screenshots/exp10.png"
+      {
+        "file": "report/screenshots/exp10-1.png",
+        "title": "College Portal Home View",
+        "caption": "Figure 10.1: College website with embedded virtual AI concierge launcher."
+      },
+      {
+        "file": "report/screenshots/exp10-2.png",
+        "title": "Interactive Chatbot Interface",
+        "caption": "Figure 10.2: Active multi-turn chatbot conversation session."
+      }
     ],
     "conclusion": "A college helpdesk chatbot for JECRC University was built with multi-turn conversational memory. The bot answered admissions, curriculum, and placement inquiries accurately while preserving context across consecutive user queries."
   },
@@ -468,7 +563,16 @@
     ],
     "prompt": "Create an AI content generation app for blogs, emails, and social posts.\n\nINPUTS\n- type: blog | email | instagram | twitter | linkedin\n- topic: 3\u20131000 characters\n- tone: professional | casual | friendly | witty | persuasive\n- length: short | medium | long\n- keyPoints: optional bullet points\n\nFORMAT INSTRUCTIONS\n- blog: Markdown with title (#), introduction, 3-4 structured sections (##), and CTA.\n- email: \"Subject:\" line, professional greeting, 2-3 body paragraphs, and sign-off.\n- instagram: Hook first line, engaging narrative, 8-10 relevant hashtags.\n- twitter: Numbered thread (1/, 2/, 3/...) with punchy tweets under 260 chars.\n- linkedin: Professional hook, 3-4 bullet insights, key takeaway, 3-5 hashtags.\n\nUI\n- Format selection cards, topic input with chips, tone selector, length buttons, generate button, copy button, download as Markdown button, and history list.",
     "screenshots": [
-      "report/screenshots/exp11.png"
+      {
+        "file": "report/screenshots/exp11-1.png",
+        "title": "Content Architect Configuration",
+        "caption": "Figure 11.1: Multi-format AI content generation workbench and parameters."
+      },
+      {
+        "file": "report/screenshots/exp11-2.png",
+        "title": "Generated Content & Export Preview",
+        "caption": "Figure 11.2: Synthesized publication-ready article and social post."
+      }
     ],
     "conclusion": "An AI-powered content generation studio supporting five distinct publishing formats and customizable tone/length controls was developed. The application generated structured markdown blogs, professional emails, and social media threads with export functionality."
   },
@@ -511,7 +615,16 @@
     ],
     "prompt": "Build an AI image generation and captioning web app using public AI APIs.\n\nGENERATION (Pollinations AI public API \u2014 keyless, fast, reliable)\n- Styles and prompt suffixes:\n  * photoreal: \"photorealistic, 8k, sharp focus, natural studio lighting\"\n  * 3d: \"3D render, octane render, soft studio volumetric lighting\"\n  * watercolor: \"watercolor painting, soft brush strokes, textured art paper\"\n  * anime: \"modern anime aesthetic, vibrant saturated colors, crisp linework\"\n  * neon: \"cyberpunk neon aesthetic, dramatic volumetric lighting\"\n  * pixel: \"16-bit retro pixel art, clean pixel clusters\"\n- Aspect ratios: 1:1 (1024x1024), 2:3 (768x1152), 3:2 (1152x768).\n- Accept optional seed for reproducible generations.\n\nENHANCE & CAPTION\n- POST /api/image/enhance { prompt } -> richer, more visual prompt.\n- POST /api/image/caption { image } -> descriptive caption.\n\nUI\n- Two tabs: Generate and Caption. Style selection grid, aspect ratio buttons, seed randomizer, high-resolution preview, and download action.",
     "screenshots": [
-      "report/screenshots/exp12.png"
+      {
+        "file": "report/screenshots/exp12-1.png",
+        "title": "Text-to-Image Generation",
+        "caption": "Figure 12.1: Generative image studio with style and aspect ratio presets."
+      },
+      {
+        "file": "report/screenshots/exp12-2.png",
+        "title": "AI Image Captioning Tool",
+        "caption": "Figure 12.2: Automated vision analysis and descriptive caption generation."
+      }
     ],
     "conclusion": "An AI image studio supporting text-to-image synthesis and automated vision captioning was implemented using Pollinations AI and vision models. Seed-controlled generation, artistic style prompts, and prompt enhancement were successfully demonstrated."
   },
@@ -554,8 +667,16 @@
     ],
     "prompt": "Act as a DevOps engineer. Produce a complete deployment and version-control plan for this Next.js + Express + MongoDB project.\n\nVERSION CONTROL\n- Initialise Git with a production-grade .gitignore covering node_modules, .next, .env, and OS files.\n- Use conventional commits (feat/fix/docs/chore).\n- Tag the final submitted release v1.0.0 and document commit history.\n\nDEPLOYMENT ARCHITECTURE\n- Frontend: Vercel preset for Next.js App Router (https://lab-webdev-ai.vercel.app/).\n- Backend: Render Web Service for Express API gateway (https://webdev-ai-backend.onrender.com).\n- Database: MongoDB Atlas M0 replica set with secure connection string.\n- Environment variables: isolate all secrets in platform dashboards.\n\nDELIVERABLES\n- Production deployment verification checklist.\n- Rollback and disaster recovery procedure.\n- Health monitoring endpoints (/api/health) returning uptime and status.",
     "screenshots": [
-      "report/screenshots/exp13-1.png",
-      "report/screenshots/exp13-2.png"
+      {
+        "file": "report/screenshots/exp13-1.png",
+        "title": "GitHub Repository & Commit History",
+        "caption": "Figure 13.1: GitHub repository commit history, branch structure, and conventional commit workflow."
+      },
+      {
+        "file": "report/screenshots/exp13-2.png",
+        "title": "Cloud Deployment Infrastructure",
+        "caption": "Figure 13.2: Multi-cloud production deployment showing Vercel edge status, Render REST API gateway health check, and MongoDB Atlas connectivity."
+      }
     ],
     "conclusion": "The full-stack application was deployed across Vercel for the Next.js frontend, Render for the Express REST gateway, and MongoDB Atlas for database persistence. Version control with Git conventional commits and the v1.0.0 release tag established an auditable release pipeline."
   },
@@ -598,7 +719,16 @@
     ],
     "prompt": "Act as a QA engineer and application security reviewer for a Next.js + Express + MongoDB application. Produce a practical quality and security plan.\n\nTESTING\n- Unit-test pure validation helpers (email regex, phone patterns, contact form alerts).\n- API integration tests using Node.js built-in test runner (node:test):\n  * /api/health returns 200 OK\n  * Tasks CRUD happy path (create 201, list 200, delete 204)\n  * Auth token issuance and protected profile retrieval\n  * Students aggregation stats and 409 duplicate roll rejection\n  * 401 unauthorized and 403 forbidden role guards\n\nPERFORMANCE & SECURITY\n- Run Lighthouse audits and document Core Web Vitals.\n- Review against OWASP Top 10: bcrypt password storage, JWT expiry, NoSQL injection prevention, CORS policy, and server-side secret isolation.\n- Provide a test runner dashboard in the UI displaying live results.",
     "screenshots": [
-      "report/screenshots/exp14.png"
+      {
+        "file": "report/screenshots/exp14-1.png",
+        "title": "Automated Test Runner Dashboard",
+        "caption": "Figure 14.1: Automated test runner execution with 100% passing test assertions."
+      },
+      {
+        "file": "report/screenshots/exp14-2.png",
+        "title": "Lighthouse Performance & Security Analysis",
+        "caption": "Figure 14.2: Lighthouse performance benchmarks and OWASP Top 10 security audit."
+      }
     ],
     "conclusion": "Automated unit and API test suites executed with 100% passing results using the Node.js test runner. Lighthouse profiling confirmed 98+ Performance and 100 Accessibility, while the OWASP Top 10 security review validated bcrypt hashing, signed JWTs, and isolated API credentials."
   },
@@ -639,10 +769,23 @@
         "action": "A single live URL demonstrating the complete full-stack web and AI engineering workflow."
       }
     ],
-    "prompt": "Act as a full-stack architect. Integrate the existing experiment modules into one deployable capstone product called \"JECRC AI Studio\" (Bluepeak AI).\n\nPRODUCT ARCHITECTURE\n- Public marketing shell: Home showcase, About, Services, Contact, Login & Registration.\n- Authenticated workspace: Overview dashboard, AI Text Studio, Content Generator, College Chatbot, Image Studio, and Admin-only Student Records.\n- Single unified design system with responsive layouts from 360px to 1920px.\n\nFULL-STACK INTEGRATION\n- Next.js App Router + TypeScript + Tailwind CSS on Vercel.\n- Express.js REST gateway on Render.\n- MongoDB Atlas with Mongoose models.\n- JWT authentication with role-based guards.\n- Server-side AI provider abstraction: Google Gemini 1.5, OpenAI GPT-4o, Pollinations image API, and resilient keyless fallbacks.\n\nDELIVERABLES\n- Complete viva demonstration flow: Home -> Registration -> Login -> Dashboard -> Text Generation -> Content -> Chatbot -> Image -> Admin Student Records -> Logout.\n- Verified live production URL: https://lab-webdev-ai.vercel.app/",
+    "prompt": "Act as a full-stack architect. Integrate the existing experiment modules into one deployable capstone product called \"JECRC AI Studio\" (Bluepeak AI).\n\nPRODUCT ARCHITECTURE\n- Public marketing shell: Home showcase, About, Services, Contact, Login & Registration.\n- Authenticated workspace: Overview dashboard, AI Text Studio, Content Generator, College Chatbot, Image Studio, and Admin-only Student Records.\n- Single unified design system with responsive layouts from 360px to 1920px.\n\nFULL-STACK INTEGRATION\n- Next.js App Router + TypeScript + Tailwind CSS on Vercel.\n- Express.js REST gateway on Render.\n- MongoDB Atlas with Mongoose models.\n- JWT authentication with role-based guards.\n- Server-side AI provider abstraction: Google Gemini 1.5, OpenAI GPT-4o, Pollinations image API, and resilient keyless fallbacks.\n\nDELIVERABLES\n- Complete end-to-end evaluation workflow: Home -> Registration -> Login -> Dashboard -> Text Generation -> Content -> Chatbot -> Image -> Admin Student Records -> Logout.\n- Verified live production URL: https://lab-webdev-ai.vercel.app/",
     "screenshots": [
-      "report/screenshots/exp15-1.png",
-      "report/screenshots/exp15-2.png"
+      {
+        "file": "report/screenshots/exp15-1.png",
+        "title": "Home Page (Unified Capstone Portal)",
+        "caption": "Figure 15.1: Unified capstone application public interface (https://lab-webdev-ai.vercel.app/) showcasing responsive design system."
+      },
+      {
+        "file": "report/screenshots/exp15-2.png",
+        "title": "Authenticated AI Creative Studio",
+        "caption": "Figure 15.2: Authenticated workspace demonstrating AI creative studio modules and college chatbot assistant."
+      },
+      {
+        "file": "report/screenshots/exp15-3.png",
+        "title": "Admin Student Records & Database Management",
+        "caption": "Figure 15.3: Role-based admin student records management and MongoDB database operations."
+      }
     ],
     "conclusion": "All 14 preceding practical modules were synthesized into a unified full-stack AI application and deployed live at https://lab-webdev-ai.vercel.app/. Authentication, responsive UI design, Express REST microservices, MongoDB database persistence, and Generative AI APIs operated seamlessly under a single production architecture."
   }

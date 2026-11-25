@@ -2,8 +2,8 @@ import './globals.css';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Web Development Using AI — College Practical Lab Record',
-  description: '15 Practical Experiments for Web Development Using AI (2026-27), JECRC University',
+  title: 'Web Development Using AI — College Practical Lab Record (BCO682A)',
+  description: '15 Practical Experiments for Web Development Using AI (2026-27), JECRC University. Developed by Mayank Goyal (23BCON1662).',
 };
 
 export default function RootLayout({
@@ -13,50 +13,72 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen antialiased bg-slate-50 text-slate-900">
-        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+      <body className="flex flex-col min-h-screen antialiased bg-[#f7f6f2] text-zinc-900 selection:bg-blue-600 selection:text-white">
+        <header className="sticky top-0 z-50 bg-[#f7f6f2]/90 backdrop-blur-md border-b border-[#e5e4de]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            {/* Logo */}
             <div className="flex items-center gap-3">
-              <Link href="/" className="flex items-center gap-2 group">
-                <div className="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm group-hover:bg-indigo-700 transition">
-                  AI
+              <Link href="/" className="flex items-center gap-2.5 group">
+                <div className="flex items-center gap-1 p-1.5 rounded-lg border border-blue-600/30 bg-blue-50/50 group-hover:bg-blue-100/50 transition">
+                  <span className="w-2.5 h-4 rounded-[2px] bg-blue-600"></span>
+                  <span className="w-2.5 h-4 rounded-[2px] border border-blue-600"></span>
                 </div>
-                <div>
-                  <div className="font-semibold text-slate-900 leading-tight">Web Development Using AI</div>
-                  <div className="text-xs text-slate-500">JECRC University • Lab Record 2026–27</div>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-extrabold tracking-tight text-lg text-zinc-950 font-mono">WebDev AI</span>
+                  <span className="text-xs font-mono text-zinc-400 hidden sm:inline">/ practical-record</span>
                 </div>
               </Link>
             </div>
 
-            <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-              <Link href="/" className="hover:text-indigo-600 transition">Dashboard</Link>
-              <Link href="/exp1" className="hover:text-indigo-600 transition">Exp 1-4 (Frontend)</Link>
-              <Link href="/exp5" className="hover:text-indigo-600 transition">Exp 5-8 (Backend & DB)</Link>
-              <Link href="/exp9" className="hover:text-indigo-600 transition">Exp 9-12 (GenAI)</Link>
-              <Link href="/exp13" className="hover:text-indigo-600 transition">Exp 13-14 (DevOps & QA)</Link>
-              <Link href="/exp15" className="hover:text-indigo-600 font-semibold text-indigo-600 transition">Exp 15 (Capstone)</Link>
+            {/* Navigation links */}
+            <nav className="hidden md:flex items-center gap-6 text-xs font-mono font-medium text-zinc-600">
+              <Link href="/" className="hover:text-blue-600 transition text-zinc-900 font-semibold">Dashboard</Link>
+              <Link href="/exp1" className="hover:text-blue-600 transition">01–04 Frontend</Link>
+              <Link href="/exp5" className="hover:text-blue-600 transition">05–08 Backend</Link>
+              <Link href="/exp9" className="hover:text-blue-600 transition">09–12 GenAI</Link>
+              <Link href="/exp13" className="hover:text-blue-600 transition">13–14 DevOps</Link>
+              <Link href="/exp15" className="hover:text-blue-600 text-blue-600 font-bold transition">15 Capstone</Link>
             </nav>
 
-            <div className="flex items-center gap-3 text-xs">
-              <div className="hidden sm:block text-right">
-                <div className="font-medium text-slate-800">Mayank Goyal</div>
-                <div className="text-slate-500">23BCON1662 • Sec P</div>
+            {/* Student Frame Badge & Academic Status */}
+            <div className="flex items-center gap-3">
+              <div className="hidden lg:flex flex-col items-end">
+                <div className="relative border border-blue-600/40 rounded px-2 py-0.5 text-[10px] font-mono text-blue-700 bg-white shadow-2xs">
+                  Frame 01 / 15
+                  <span className="absolute -bottom-2.5 right-1 text-[8px] font-mono text-blue-600 bg-blue-100 px-1 rounded-2xs">
+                    1920 × 1080
+                  </span>
+                </div>
               </div>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                ● Live Ready
-              </span>
+
+              <div className="text-right text-xs pl-2 border-l border-zinc-200">
+                <div className="font-bold text-zinc-900 leading-tight">Mayank Goyal</div>
+                <div className="text-[10px] font-mono text-zinc-500">23BCON1662 • Sec P</div>
+              </div>
             </div>
           </div>
         </header>
 
-        <main className="flex-grow">
+        <main className="flex-grow blueprint-canvas">
           {children}
         </main>
 
-        <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-          <div className="max-w-7xl mx-auto px-4">
-            <p className="font-medium text-slate-700">Web Development Using AI (BCO682A) — College Practical Record 2026–27</p>
-            <p className="mt-1">Developed by Mayank Goyal (23BCON1662) • Submitted to Mr. Mohit Parashar • JECRC University, Jaipur</p>
+        <footer className="bg-[#f7f6f2] border-t border-[#e5e4de] py-8 text-xs text-zinc-600">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-3 rounded-[1px] bg-blue-600"></span>
+                <span className="w-2 h-3 rounded-[1px] border border-blue-600"></span>
+              </div>
+              <span className="font-mono font-bold text-zinc-900">WebDev AI Lab</span>
+              <span className="text-zinc-400">•</span>
+              <span>Web Development Using AI (BCO682A)</span>
+            </div>
+
+            <div className="text-center md:text-right font-mono text-[11px] text-zinc-500">
+              <p>Candidate: <strong className="text-zinc-800">Mayank Goyal</strong> (23BCON1662) • <a href="mailto:mayank.23bcon1662@jecrcu.edu.in" className="text-blue-600 hover:underline">mayank.23bcon1662@jecrcu.edu.in</a></p>
+              <p className="mt-0.5">Evaluator: <strong className="text-zinc-800">Mr. Mohit Parashar</strong> • JECRC University, Jaipur (Session 2026–27)</p>
+            </div>
           </div>
         </footer>
       </body>

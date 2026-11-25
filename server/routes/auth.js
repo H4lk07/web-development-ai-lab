@@ -24,6 +24,14 @@ async function initDemoUsers() {
       {
         _id: 'usr_mayank',
         name: 'Mayank Goyal',
+        email: 'mayank.23bcon1662@jecrcu.edu.in',
+        passwordHash: userHash,
+        role: 'user',
+        createdAt: new Date().toISOString()
+      },
+      {
+        _id: 'usr_mayank_demo',
+        name: 'Mayank Goyal',
         email: 'mayank@demo.dev',
         passwordHash: userHash,
         role: 'user',

@@ -96,7 +96,7 @@ function seedInitialData() {
         _id: 'stud_1',
         name: 'Mayank Goyal',
         rollNo: '23BCON1662',
-        email: 'mayank.goyal@jecrcu.edu.in',
+        email: 'mayank.23bcon1662@jecrcu.edu.in',
         course: 'CSE',
         year: 4,
         gpa: 9.2,

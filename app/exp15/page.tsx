@@ -89,6 +89,7 @@ export default function CapstoneApplicationPage() {
           <div className="text-right text-xs">
             <div className="text-slate-400">Authenticated As:</div>
             <div className="font-bold text-white">Mayank Goyal ({userRole.toUpperCase()})</div>
+            <div className="text-[10px] text-indigo-300 font-mono">mayank.23bcon1662@jecrcu.edu.in</div>
           </div>
           <button
             onClick={() => setUserRole(userRole === 'admin' ? 'user' : 'admin')}
@@ -125,7 +126,7 @@ export default function CapstoneApplicationPage() {
           </div>
 
           <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs space-y-2">
-            <div className="font-bold text-slate-800">Viva Demonstration Flow</div>
+            <div className="font-bold text-slate-800">System Workflow &amp; Evaluation Pipeline</div>
             <div className="text-[11px] text-slate-600 space-y-1">
               <div>1. Overview &amp; Health Probe</div>
               <div>2. AI Text Synthesis</div>

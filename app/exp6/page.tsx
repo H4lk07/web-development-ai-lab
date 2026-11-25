@@ -240,7 +240,7 @@ export default function AuthPage() {
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-[11px] text-slate-500 space-y-1">
                 <div className="font-semibold text-slate-700">Pre-seeded Test Credentials:</div>
                 <div>Admin: <span className="font-mono text-indigo-600">admin@demo.dev</span> / <span className="font-mono text-slate-600">AdminPass123!</span></div>
-                <div>Student: <span className="font-mono text-indigo-600">mayank@demo.dev</span> / <span className="font-mono text-slate-600">StudentPass123!</span></div>
+                <div>Student: <span className="font-mono text-indigo-600">mayank.23bcon1662@jecrcu.edu.in</span> / <span className="font-mono text-slate-600">StudentPass123!</span></div>
               </div>
             </form>
           ) : (

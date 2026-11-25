@@ -2,14 +2,26 @@ import fitz # PyMuPDF
 import os
 
 pdf_path = "report/final/WEB_DEVELOPMENT_AI_LAB_RECORD.pdf"
+if not os.path.exists(pdf_path):
+    print(f"Error: {pdf_path} not found.")
+    exit(1)
+
 doc = fitz.open(pdf_path)
 
 page_count = len(doc)
 print(f"=== PDF AUDIT ===")
-print(f"Total Pages: {page_count} (Target: 32)")
+print(f"Total Pages: {page_count} (Target: 49)")
 
 out_dir = "report/validation/page_images"
 os.makedirs(out_dir, exist_ok=True)
+
+# Clean up older page images if any
+for f in os.listdir(out_dir):
+    if f.startswith("page_") and f.endswith(".png"):
+        try:
+            os.remove(os.path.join(out_dir, f))
+        except Exception:
+            pass
 
 for i in range(page_count):
     page = doc[i]

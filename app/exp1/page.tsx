@@ -227,7 +227,7 @@ export default function PortfolioPage() {
                 <span className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-indigo-400 font-bold">✉</span>
                 <div>
                   <div className="text-slate-400">Institutional Email</div>
-                  <div className="font-semibold text-white">mayank.goyal@jecrcu.edu.in</div>
+                  <div className="font-semibold text-white">mayank.23bcon1662@jecrcu.edu.in</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">

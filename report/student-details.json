@@ -1,5 +1,6 @@
 {
   "studentName": "Mayank Goyal",
+  "email": "mayank.23bcon1662@jecrcu.edu.in",
   "university": "JECRC University",
   "collegeLogo": "report/reference/jecrc_logo.png",
   "rollNumber": "23BCON1662",
@@ -12,6 +13,6 @@
   "subjectCode": "BCO682A",
   "submittedTo": "Mr. Mohit Parashar",
   "academicSession": "2026–27",
-  "aiTool": "Antigravity",
+  "aiTool": "Google Gemini & GitHub Copilot",
   "preferredAIProvider": "Gemini / OpenAI"
 }
