@@ -644,33 +644,27 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Candidate Metadata Specs */}
-              <div className="space-y-1.5 py-2.5 border-t border-b border-zinc-100 text-xs font-mono">
+              {/* Candidate Metadata Specs - High-Contrast Black & White Print Optimized */}
+              <div className="space-y-2 py-3 border-t-2 border-b-2 border-zinc-950 text-xs font-mono bg-[#f7f6f2] p-3 rounded-xl my-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">Candidate:</span>
-                  <span className="font-bold text-zinc-900 font-sans">Mayank Goyal</span>
+                  <span className="text-zinc-950 font-bold uppercase text-[11px]">Candidate:</span>
+                  <span className="font-black text-zinc-950 font-sans text-sm uppercase">Mayank Goyal</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">Roll / Enroll:</span>
-                  <span className="font-bold text-blue-600">23BCON1662</span>
+                  <span className="text-zinc-950 font-bold uppercase text-[11px]">Roll / Enroll:</span>
+                  <span className="font-black text-white bg-zinc-950 px-2 py-0.5 rounded text-xs">23BCON1662</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">Email:</span>
-                  <span className="text-[10px] text-zinc-700 truncate max-w-[170px]" title="mayank.23bcon1662@jecrcu.edu.in">
-                    mayank.23bcon1662@jecrcu.edu.in
-                  </span>
+                  <span className="text-zinc-950 font-bold uppercase text-[11px]">Section &amp; Sem:</span>
+                  <span className="text-zinc-950 font-extrabold text-xs">Sec P • 7th Semester</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">Section & Sem:</span>
-                  <span className="text-zinc-800">Sec P • 7th Semester</span>
+                  <span className="text-zinc-950 font-bold uppercase text-[11px]">Course Code:</span>
+                  <span className="text-zinc-950 font-extrabold text-xs">Web AI (BCO682A)</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">Course / Code:</span>
-                  <span className="text-zinc-800">Web AI • BCO682A</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">Evaluator:</span>
-                  <span className="font-sans font-semibold text-zinc-900">Mr. Mohit Parashar</span>
+                  <span className="text-zinc-950 font-bold uppercase text-[11px]">Evaluator:</span>
+                  <span className="font-sans font-black text-zinc-950 text-xs">Mr. Mohit Parashar</span>
                 </div>
               </div>
             </div>
