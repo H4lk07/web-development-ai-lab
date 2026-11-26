@@ -1,36 +1,14 @@
-# Experiment 12: AI Image Generation or Image Captioning Application
+# Experiment 12 — AI Prompt Specification
 
-## Aim
-Develop an AI-enabled image generation or image captioning web application using publicly available AI APIs.
-
-## Technologies Used
-Node.js, Express.js, native fetch, Pollinations public image API, Gemini vision API, React 18, Tailwind CSS, TypeScript
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Computer Vision & Diffusion Model Integration Specialist.
+[OBJECTIVE]: Develop an AI-powered creative image generation and multimodal vision captioning web application.
+[STACK]: Express.js Media Router, Pollinations Public Diffusion API, Google Gemini Vision API, React 18 Studio.
+[TEXT-TO-IMAGE DIFFUSION ENGINE]:
+- Parametric style modifiers: Photoreal (8k studio lighting), 3D Render (Octane volumetric), Watercolor, Anime, Cyberpunk.
+- Aspect ratio geometry: 1:1 Square (1024x1024), 2:3 Portrait (768x1152), and 3:2 Landscape (1152x768).
+- Deterministic Seed Controls: Support integer seed parameters ensuring mathematically reproducible image diffusion.
+[MULTIMODAL CAPTIONING & UI]:
+- POST /api/image/caption analyzes image URLs with Gemini Vision and synthesizes natural-language descriptions.
+- Responsive creative studio interface with interactive style cards, seed randomizer, and high-resolution downloads.
 ```
-Build an AI image generation and captioning web app using public AI APIs.
-
-GENERATION (Pollinations AI public API — keyless, fast, reliable)
-- Styles and prompt suffixes:
-  * photoreal: "photorealistic, 8k, sharp focus, natural studio lighting"
-  * 3d: "3D render, octane render, soft studio volumetric lighting"
-  * watercolor: "watercolor painting, soft brush strokes, textured art paper"
-  * anime: "modern anime aesthetic, vibrant saturated colors, crisp linework"
-  * neon: "cyberpunk neon aesthetic, dramatic volumetric lighting"
-  * pixel: "16-bit retro pixel art, clean pixel clusters"
-- Aspect ratios: 1:1 (1024x1024), 2:3 (768x1152), 3:2 (1152x768).
-- Accept optional seed for reproducible generations.
-
-ENHANCE & CAPTION
-- POST /api/image/enhance { prompt } -> richer, more visual prompt.
-- POST /api/image/caption { image } -> descriptive caption.
-
-UI
-- Two tabs: Generate and Caption. Style selection grid, aspect ratio buttons, seed randomizer, high-resolution preview, and download action.
-```
-
-## Conclusion
-An AI image studio supporting text-to-image synthesis and automated vision captioning was implemented using Pollinations AI and vision models. Seed-controlled generation, artistic style prompts, and prompt enhancement were successfully demonstrated.

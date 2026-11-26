@@ -1,35 +1,15 @@
-# Experiment 11: AI-Based Content Generation Application
+# Experiment 11 — AI Prompt Specification
 
-## Aim
-Create an AI-based content generation web application for blogs, emails, or social media posts.
-
-## Technologies Used
-Node.js, Express.js, native fetch, OpenAI / Gemini APIs, React 18, Tailwind CSS, TypeScript, browser Clipboard & Blob download APIs
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Generative AI Prompt Architect & Content Systems Engineer.
+[OBJECTIVE]: Engineer a multi-format AI content generation workbench for automated publication workflows.
+[STACK]: Node.js Express API, Gemini 1.5 Flash, Browser Clipboard & Blob Download APIs, Tailwind CSS.
+[CONTENT FORMAT ARCHITECTURE]:
+- Blog Article: Formats output with H1/H2 Markdown tags, engaging intro, 3-4 structured body sections, and CTA.
+- Executive Email: Produces professional "Subject:" header, formal salutation, 2-3 body paragraphs, and sign-off.
+- Social Platforms: Generates optimized LinkedIn thought-leadership posts, Instagram captions, and numbered X threads.
+[CONTROLS & USER INTERFACE]:
+- Form controls for Topic (3-1,000 chars), Tone (Professional, Casual, Friendly, Witty, Persuasive), and Length presets.
+- Real-time character/word telemetry, instant clipboard copy handler, and one-click Markdown (.md) file export.
+- Whitelist validation on all input parameters returning structured HTTP 400 JSON errors on malformed payloads.
 ```
-Create an AI content generation app for blogs, emails, and social posts.
-
-INPUTS
-- type: blog | email | instagram | twitter | linkedin
-- topic: 3–1000 characters
-- tone: professional | casual | friendly | witty | persuasive
-- length: short | medium | long
-- keyPoints: optional bullet points
-
-FORMAT INSTRUCTIONS
-- blog: Markdown with title (#), introduction, 3-4 structured sections (##), and CTA.
-- email: "Subject:" line, professional greeting, 2-3 body paragraphs, and sign-off.
-- instagram: Hook first line, engaging narrative, 8-10 relevant hashtags.
-- twitter: Numbered thread (1/, 2/, 3/...) with punchy tweets under 260 chars.
-- linkedin: Professional hook, 3-4 bullet insights, key takeaway, 3-5 hashtags.
-
-UI
-- Format selection cards, topic input with chips, tone selector, length buttons, generate button, copy button, download as Markdown button, and history list.
-```
-
-## Conclusion
-An AI-powered content generation studio supporting five distinct publishing formats and customizable tone/length controls was developed. The application generated structured markdown blogs, professional emails, and social media threads with export functionality.

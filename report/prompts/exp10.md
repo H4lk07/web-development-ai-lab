@@ -1,35 +1,15 @@
-# Experiment 10: AI-Powered Chatbot for a College Website
+# Experiment 10 — AI Prompt Specification
 
-## Aim
-Develop an AI-powered chatbot for a college or business website using Generative AI APIs.
-
-## Technologies Used
-Node.js, Express.js, native fetch, OpenAI / Gemini chat APIs, in-memory session store (Map), React 18, Tailwind CSS, TypeScript
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Conversational AI Architect & Full-Stack Engineer.
+[OBJECTIVE]: Develop an AI-powered conversational helpdesk assistant for the JECRC University web portal.
+[STACK]: Express.js Chat Engine, Google Gemini 1.5 Flash, In-Memory Session Cache (Map), React 18 Chat Interface.
+[PERSONA & DOMAIN BOUNDARIES]:
+- System Persona: "Friendly, intelligent Virtual Helpdesk Assistant for JECRC University."
+- Domain Knowledge: Admissions criteria, B.Tech curriculum, hostel amenities, campus facilities, and placements.
+- Safety Rules: Keep answers concise (under 120 words), maintain warm academic tone, and never hallucinate exam dates.
+[CONVERSATIONAL MEMORY PIPELINE]:
+- Manage multi-turn state by caching the rolling 12 messages per sessionId in server-side session memory.
+- Provide dedicated endpoints: POST /api/chat (message processing) and DELETE /api/chat/:sessionId (session reset).
+- Include offline knowledge fallback responding accurately to common admissions, fee, and placement queries.
 ```
-Build an AI chatbot for the JECRC University website.
-
-PERSONA / SYSTEM PROMPT
-"You are the friendly, intelligent Virtual Helpdesk Assistant for JECRC University.
-Help students and visitors with admissions, B.Tech CSE / ECE / ME courses, hostel facilities, placements, and contact details. Keep answers under 120 words, use plain language, be warm and professional. Never invent exact exam dates or fees."
-
-API (mounted at /api/chat)
-- POST /api/chat { message, sessionId?, provider? } -> { reply, sessionId, provider, demo }
-- DELETE /api/chat/:sessionId -> 204, clears history
-- GET /api/chat/config -> active provider, demo flag, and suggested questions
-
-BEHAVIOUR & MEMORY
-- Generate a unique sessionId when not provided.
-- Store last 12 messages per session in memory so follow-up contextual questions work.
-- Provide a robust FAQ fallback responding to admissions, placements, and hostel inquiries.
-
-UI
-- Chat bubbles, typing indicator, four clickable question chips, auto-scroll to bottom, reset conversation button, and active status indicator.
-```
-
-## Conclusion
-A college helpdesk chatbot for JECRC University was built with multi-turn conversational memory. The bot answered admissions, curriculum, and placement inquiries accurately while preserving context across consecutive user queries.

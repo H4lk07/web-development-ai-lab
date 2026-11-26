@@ -1,37 +1,15 @@
-# Experiment 7: RESTful APIs Tested with Postman
+# Experiment 7 — AI Prompt Specification
 
-## Aim
-Develop RESTful APIs for a web application and test them using Postman with AI-generated API documentation.
-
-## Technologies Used
-Node.js, Express.js, MongoDB, OpenAPI 3.0, swagger-jsdoc, swagger-ui-express, Postman collection v2.1, React 18, Tailwind CSS
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: API Platform Architect & Quality Automation Specialist.
+[OBJECTIVE]: Design, document, and test a production-grade product catalog RESTful API service.
+[STACK]: Express.js REST Gateway, OpenAPI 3.0.3, swagger-ui-express, swagger-jsdoc, Postman Collection v2.1.
+[API CONTRACT - Base /api/products]:
+- Standard CRUD verbs supporting query filters (?category=, ?inStock=, ?search=, ?sort=, ?page=, ?limit=).
+- Strict HTTP status code mapping: 200 OK, 201 Created, 204 No Content, 400 Bad Request, 404 Not Found.
+[DOCUMENTATION & TEST SPECIFICATION]:
+- Generate comprehensive OpenAPI 3.0.3 specification exposing JSON schema definitions and response codes.
+- Mount interactive Swagger UI explorer at /api-docs and raw contract endpoint at /api/openapi.json.
+- Produce automated Postman Collection (v2.1) with 10 dependency-ordered requests and pre-request token scripts.
+- Embed live Postman-like API workbench in the client UI to execute HTTP requests and inspect raw response headers.
 ```
-Design and document a RESTful API for a product catalogue.
-
-RESOURCE — Product
-- name (required, max 120), description (max 2000)
-- category: electronics | apparel | books | home (required)
-- price: required, >= 0; quantity: >= 0, default 0; inStock: boolean, default true
-
-ENDPOINTS (base /api/products)
-- GET / ?category=&inStock=&search=&page=&limit=&sort=
-- GET /:id -> 200 or 404
-- POST / -> 201 + Location header; validation failure -> 400
-- PUT /:id -> full replace
-- PATCH /:id -> partial update
-- DELETE /:id -> 204 No Content
-
-DOCUMENTATION & TESTING
-- Produce a complete OpenAPI 3.0.3 document with schemas, parameters, and responses.
-- Serve Swagger UI at /api-docs and raw spec at /api/openapi.json.
-- Generate a Postman collection (v2.1) with 10 dependency-ordered requests and environment file.
-- Provide a Postman-like live workbench in the UI to send requests and inspect headers and response JSON.
-```
-
-## Conclusion
-A product catalog RESTful API was developed and documented with OpenAPI 3.0 and Swagger UI. An automated 10-request Postman test collection verified endpoint reliability, pagination, query filtering, and error handling.

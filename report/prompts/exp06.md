@@ -1,40 +1,16 @@
-# Experiment 6: User Authentication and Authorization
+# Experiment 6 — AI Prompt Specification
 
-## Aim
-Implement user authentication and authorization (Login/Registration) using Express.js, MongoDB, and AI coding assistants.
-
-## Technologies Used
-Node.js, Express.js, MongoDB, Mongoose, bcryptjs, jsonwebtoken (JWT), CORS, React 18 + Next.js, Tailwind CSS, TypeScript
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Application Security Architect & Identity Management Specialist.
+[OBJECTIVE]: Implement a secure user authentication and role-based access control (RBAC) microservice.
+[STACK]: Express.js, MongoDB, Mongoose, bcryptjs, jsonwebtoken (JWT), HTTP Bearer Authorization.
+[DATA MODEL - User]:
+- name: String, required; email: String, required, unique, lowercase, regex-validated; role: "user" | "admin".
+- passwordHash: String, required, select: false (strictly isolated from default queries); timestamps: true.
+[SECURITY PIPELINE]:
+- POST /api/auth/register: Salt and hash raw password with bcrypt (cost 10); reject duplicates with 409 Conflict.
+- POST /api/auth/login: Verify password hash via bcrypt.compare; sign stateless HS256 JWT expiring in 2 hours.
+- Middleware Guards: requireAuth decodes Bearer token; requireRole("admin") restricts admin endpoints with 403.
+- Interactive Dashboard: Tabbed Login/Register views, Bearer token storage in client state, and admin user table.
+[CONSTRAINTS]: Never transmit or log plaintext passwords; sanitize all user DTOs before returning JSON responses.
 ```
-Implement authentication and authorization for an Express.js + MongoDB API.
-
-MODEL — User
-- name: required, max 60
-- email: required, unique, lowercase, validated
-- passwordHash: required, select: false
-- role: "user" | "admin", default "user"
-- timestamps
-
-ROUTES
-- POST /api/auth/register { name, email, password, role } -> hash with bcrypt, return 201 { user, token }
-- POST /api/auth/login { email, password } -> compare hash, return { user, token }; invalid credentials -> 401
-- GET /api/auth/me -> requires valid Bearer token
-- GET /api/users -> admin only; non-admin receives 403 Forbidden
-
-SECURITY RULES
-- Passwords only stored as bcrypt hashes (cost 10).
-- JWT signed with JWT_SECRET, expires in 2h.
-- Never expose passwordHash in API responses.
-- Seed demo accounts on boot for demonstration.
-
-UI
-- Login / Register tabs, inline field errors, Bearer token stored in state, profile panel, and admin user table.
-```
-
-## Conclusion
-User registration, bcrypt password hashing, JWT token authentication, and role-based route authorization were successfully deployed. Protected routes correctly authenticated admin tokens while returning 401 and 403 status codes for invalid credentials.

@@ -1,38 +1,15 @@
-# Experiment 9: AI-Powered Text Generation with OpenAI / Gemini
+# Experiment 9 — AI Prompt Specification
 
-## Aim
-Integrate the OpenAI/Gemini API into a web application for AI-powered text generation.
-
-## Technologies Used
-Node.js, Express.js, native fetch, Google Gemini 1.5 Flash API, OpenAI GPT-4o API, server-side proxy, React 18, Tailwind CSS, TypeScript
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: AI Systems Integrator & LLM Prompt Engineer.
+[OBJECTIVE]: Build an AI-Powered Text Generation Studio integrating Gemini and OpenAI APIs through a secure proxy.
+[STACK]: Node.js Express REST Proxy, Google Gemini 1.5 Flash API, OpenAI GPT-4o API, React 18, Tailwind CSS.
+[BACKEND PROXY - POST /api/generate]:
+- Isolate all secret API keys strictly on the server; client never touches third-party AI provider credentials.
+- Multi-provider abstraction in server/lib/ai.js supporting Google Gemini generateContent and OpenAI chat.completions.
+- Provide keyless deterministic neural fallback to ensure zero downtime when developer keys are unconfigured.
+[TASK MODES & CONSTRAINTS]:
+- Enforce prompt boundaries (4 to 4,000 characters) and token limits (50 to 2,000 maxTokens) via backend validation.
+- Implement specialized system prompts for 5 generation modes: Freeform, Summarize, Rewrite, Brainstorm, and Explain.
+- Client UI includes real-time token sliders, model selectors, copy-to-clipboard buttons, and session generation history.
 ```
-Integrate OpenAI and Gemini text generation into a web application via an Express backend proxy.
-
-SERVER ARCHITECTURE (Express.js, no client-side keys)
-- Shared provider abstraction in server/lib/ai.js:
-  * Gemini -> POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent
-  * OpenAI -> POST https://api.openai.com/v1/chat/completions
-  * Demo -> deterministic structured output when keys are unconfigured
-- Return { text, provider, model, demo, mode }.
-
-ENDPOINT — POST /api/generate
-- Body: { prompt, mode, provider, maxTokens }
-- Supported modes with specialized system prompts:
-  * freeform: concise, helpful assistant
-  * summarize: 3-5 bullet points preserving key facts
-  * rewrite: polished, professional, clear tone
-  * brainstorm: 5 actionable ideas with one-line rationale
-  * explain: simple analogy under 150 words
-- Validate: prompt 4–4000 chars, mode whitelisted.
-
-UI
-- Mode tabs, prompt textarea, character counter, token slider, generate button with loading state, copy button, and session history.
-```
-
-## Conclusion
-An AI Text Studio was integrated with Google Gemini and OpenAI through a secure Express backend proxy. All five generation modes (freeform, summarize, rewrite, brainstorm, explain) operated with isolated API credentials and instant fallback resiliency.

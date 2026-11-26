@@ -1,34 +1,16 @@
-# Experiment 15: Complete AI-Enabled Full-Stack Web Application
+# Experiment 15 — AI Prompt Specification
 
-## Aim
-Develop and deploy a complete AI-enabled Full Stack Web Application integrating responsive frontend, backend, database, authentication, Generative AI API, and cloud deployment.
-
-## Technologies Used
-Next.js App Router, React 18, TypeScript, Tailwind CSS, Express.js REST gateway, MongoDB Atlas, JWT + bcryptjs, Gemini 1.5, Pollinations, Vercel, Render
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Principal Full-Stack Enterprise Architect & Systems Synthesizer.
+[OBJECTIVE]: Synthesize all 14 preceding practical modules into one unified production full-stack AI platform.
+[STACK]: Next.js 14 App Router, TypeScript, Tailwind CSS, Express 5.0 REST Gateway, MongoDB Atlas, Google Gemini 1.5.
+[SYSTEM ARCHITECTURE & INTEGRATION]:
+- Public Marketing Shell: Enterprise hero showcase, service offerings, about documentation, and contact inquiry portal.
+- Authenticated Creative Workspace: Role-gated dashboard hosting AI Text Studio, Content Generator, and Image Studio.
+- Institutional Virtual Concierge: Embedded JECRC University AI chatbot maintaining multi-turn conversational context.
+- Database Administration: RBAC-protected student management module allowing authorized admins to manage MongoDB records.
+[DEPLOYMENT & VERIFICATION]:
+- Monorepo orchestration: Next.js frontend deployed on Vercel, Express REST gateway deployed on Render.
+- End-to-end evaluation flow: Public Showcase -> Registration -> Login -> Creative Studio -> Admin DB -> Logout.
+- High-availability cloud configuration with isolated environment variables, automated health probes, and SSL encryption.
 ```
-Act as a full-stack architect. Integrate the existing experiment modules into one deployable capstone product called "JECRC AI Studio" (Bluepeak AI).
-
-PRODUCT ARCHITECTURE
-- Public marketing shell: Home showcase, About, Services, Contact, Login & Registration.
-- Authenticated workspace: Overview dashboard, AI Text Studio, Content Generator, College Chatbot, Image Studio, and Admin-only Student Records.
-- Single unified design system with responsive layouts from 360px to 1920px.
-
-FULL-STACK INTEGRATION
-- Next.js App Router + TypeScript + Tailwind CSS on Vercel.
-- Express.js REST gateway on Render.
-- MongoDB Atlas with Mongoose models.
-- JWT authentication with role-based guards.
-- Server-side AI provider abstraction: Google Gemini 1.5, OpenAI GPT-4o, Pollinations image API, and resilient keyless fallbacks.
-
-DELIVERABLES
-- Complete viva demonstration flow: Home -> Registration -> Login -> Dashboard -> Text Generation -> Content -> Chatbot -> Image -> Admin Student Records -> Logout.
-- Verified live production URL: https://lab-webdev-ai.vercel.app/
-```
-
-## Conclusion
-All 14 preceding practical modules were synthesized into a unified full-stack AI application and deployed live at https://lab-webdev-ai.vercel.app/. Authentication, responsive UI design, Express REST microservices, MongoDB database persistence, and Generative AI APIs operated seamlessly under a single production architecture.

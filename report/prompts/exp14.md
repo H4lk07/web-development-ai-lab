@@ -1,32 +1,15 @@
-# Experiment 14: Testing, Debugging, Performance and Security Analysis
+# Experiment 14 — AI Prompt Specification
 
-## Aim
-Perform testing, debugging, performance optimization, and security analysis of an AI-assisted web application using Generative AI tools.
-
-## Technologies Used
-Node.js built-in test runner (node:test, assert), Playwright, Lighthouse Web Vitals, npm audit, OWASP Top 10 Security Checklist
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Principal QA Automation Engineer & Application Security Auditor.
+[OBJECTIVE]: Execute automated test suites, performance benchmarks, and OWASP Top 10 security hardening for the web app.
+[STACK]: Node.js Test Runner (node:test, node:assert), Playwright, Google Lighthouse CI, OWASP Top 10 Standards.
+[AUTOMATED TESTING SPECIFICATION]:
+- Unit Assertions: Validate pure helper functions covering email regular expressions, phone formats, and form schemas.
+- Integration Suites: Automated REST API assertions testing health check (200), CRUD verbs (201/204), and JWT guards.
+- Security Verification: Verify 401 Unauthorized for missing tokens and 403 Forbidden for non-admin role escalation.
+[PERFORMANCE & SECURITY AUDIT]:
+- Run Lighthouse audits verifying Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms) with 95+ performance benchmarks.
+- OWASP Review: Validate bcrypt password salting, JWT expiry, strict CORS origins, and server-side secret isolation.
+- Interactive Dashboard: Real-time UI test runner displaying live suite execution, passing badges, and telemetry.
 ```
-Act as a QA engineer and application security reviewer for a Next.js + Express + MongoDB application. Produce a practical quality and security plan.
-
-TESTING
-- Unit-test pure validation helpers (email regex, phone patterns, contact form alerts).
-- API integration tests using Node.js built-in test runner (node:test):
-  * /api/health returns 200 OK
-  * Tasks CRUD happy path (create 201, list 200, delete 204)
-  * Auth token issuance and protected profile retrieval
-  * Students aggregation stats and 409 duplicate roll rejection
-  * 401 unauthorized and 403 forbidden role guards
-
-PERFORMANCE & SECURITY
-- Run Lighthouse audits and document Core Web Vitals.
-- Review against OWASP Top 10: bcrypt password storage, JWT expiry, NoSQL injection prevention, CORS policy, and server-side secret isolation.
-- Provide a test runner dashboard in the UI displaying live results.
-```
-
-## Conclusion
-Automated unit and API test suites executed with 100% passing results using the Node.js test runner. Lighthouse profiling confirmed 98+ Performance and 100 Accessibility, while the OWASP Top 10 security review validated bcrypt hashing, signed JWTs, and isolated API credentials.

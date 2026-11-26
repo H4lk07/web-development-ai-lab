@@ -1,38 +1,17 @@
-# Experiment 5: CRUD Web Application with Node.js, Express.js and MongoDB
+# Experiment 5 — AI Prompt Specification
 
-## Aim
-Develop a CRUD-based web application using Node.js, Express.js, and MongoDB with AI-assisted code generation.
-
-## Technologies Used
-Node.js, Express.js, MongoDB, Mongoose, in-memory resilient store, CORS, React 18 + Next.js, Tailwind CSS, TypeScript
-
-## AI Tool Used
-Antigravity
-
-## AI-Assisted Implementation Prompt
+```text
+[ROLE]: Backend Systems Architect & Database Engineer.
+[OBJECTIVE]: Construct a robust RESTful CRUD API service for task management with persistent MongoDB storage.
+[STACK]: Node.js, Express.js 5.0, MongoDB, Mongoose 8.0 ODM, CORS, React 18 Client Interface.
+[SCHEMA CONTRACT - Task]:
+- title: String, required, trimmed, maxLength: 120; description: String, default: "", maxLength: 1000.
+- priority: Enum ["low", "medium", "high"], default: "medium"; done: Boolean, default: false; timestamps: true.
+[API ENDPOINT CONTRACT - Base /api/tasks]:
+- GET /: Collection query supporting query parameters (?search=, ?done=, ?priority=, ?page=, ?limit=).
+- POST /: Document creation returning HTTP 201 Created with Location header and validated JSON payload.
+- GET /:id, PUT /:id, PATCH /:id, DELETE /:id: Standard RESTful operations with 200, 204, 400, and 404 status codes.
+[ENGINEERING RULES]:
+- Implement centralized error handling middleware catching CastError and ValidationError.
+- Provide seamless dual-mode persistence (MongoDB connection with automatic in-memory fallback for offline dev).
 ```
-You are a backend engineer. Generate a complete CRUD application for a task manager using Node.js, Express.js and MongoDB (Mongoose), plus a React UI.
-
-DATA MODEL — Task
-- title: string, required, trimmed, max 120 chars
-- description: string, default "", max 1000 chars
-- priority: "low" | "medium" | "high", default "medium"
-- done: boolean, default false
-- timestamps: true
-
-API (mounted at /api/tasks)
-- GET / list with ?search=&done=&sort=&page=&limit=
-- GET /:id read one, 404 when missing
-- POST / create, 201 + Location header; validation failure -> 400
-- PUT /:id full update
-- PATCH /:id partial update
-- DELETE /:id 204 No Content
-
-QUALITY & UI
-- Central error handler for validation and bad IDs.
-- Enable CORS and JSON body parsing.
-- UI: create form, list with priority badges, done checkbox, search box, filter buttons, and live API status badge.
-```
-
-## Conclusion
-A persistent CRUD task manager was implemented using Express.js and MongoDB. Create, read, update, patch, and delete operations were verified through both the UI and automated HTTP tests, returning standard REST status codes.
