@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import Link from 'next/link';
 
 interface Experiment {
@@ -203,6 +203,8 @@ export default function DashboardPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sliderPos, setSliderPos] = useState<number>(50); // 0 to 100%
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const sliderContainerRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     { id: 'all', label: 'All 15', count: 15 },
@@ -229,8 +231,46 @@ export default function DashboardPage() {
     });
   }, [selectedCategory, searchQuery]);
 
+  // Pointer drag handler for interactive before/after split canvas
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    setIsDragging(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    if (sliderContainerRef.current) {
+      const rect = sliderContainerRef.current.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+      setSliderPos(Math.round((x / rect.width) * 100));
+    }
+  }, []);
+
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging) return;
+      if (sliderContainerRef.current) {
+        const rect = sliderContainerRef.current.getBoundingClientRect();
+        const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+        setSliderPos(Math.round((x / rect.width) * 100));
+      }
+    },
+    [isDragging]
+  );
+
+  const handlePointerUp = useCallback((e: React.PointerEvent) => {
+    setIsDragging(false);
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {}
+  }, []);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      setSliderPos((prev) => Math.max(0, prev - 5));
+    } else if (e.key === 'ArrowRight') {
+      setSliderPos((prev) => Math.min(100, prev + 5));
+    }
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
       {/* Top Engineering Breadcrumbs & Technology Tags */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <div className="flex flex-wrap items-center gap-2">
@@ -251,30 +291,36 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Main Architectural Studio Hero Section */}
+      {/* Main Studio Signature Hero Section */}
       <div className="mb-14">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
             <div className="text-[11px] font-mono text-blue-600 mb-2 tracking-wide font-medium">
-              [: Practical Lab Portfolio :]
+              [+ The signature hero]
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.08]">
-              From code to{' '}
-              <span className="blueprint-select-box">
-                production.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-zinc-950 leading-[1.08]">
+              From prompt to{' '}
+              <span className="blueprint-select-box font-extrabold text-zinc-950">
+                <span className="blueprint-handle blueprint-handle-tl" />
+                <span className="blueprint-handle blueprint-handle-tr" />
+                <span className="blueprint-handle blueprint-handle-bl" />
+                <span className="blueprint-handle blueprint-handle-br" />
+                shipped.
                 <span className="blueprint-dim-pill">512 × 96</span>
               </span>
             </h1>
           </div>
 
-          <p className="max-w-md text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
-            A design-engineered full-stack laboratory record for Web Development Using AI (Course: BCO682A). 15 production experiments synthesized across responsive interfaces, Node.js REST services, indexed persistence, and Generative AI.
-          </p>
+          <div className="max-w-md">
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
+              The same laboratory platform as a grey wireframe and as the shipped production design. Drag the line, swipe it, or use the arrow keys.
+            </p>
+          </div>
         </div>
 
         {/* Interactive Before/After Prototype Slider Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Draggable/Interactive Prototype Canvas (8 cols) */}
+          {/* Draggable Split-Screen Canvas (8 cols) */}
           <div className="lg:col-span-8 bg-white rounded-2xl border border-[#d8d6ce] shadow-sm overflow-hidden">
             {/* Window title bar */}
             <div className="px-4 py-2.5 bg-[#f0eee6] border-b border-[#e2e0d7] flex items-center justify-between text-xs font-mono text-zinc-600">
@@ -283,29 +329,53 @@ export default function DashboardPage() {
                 <span className="w-2.5 h-2.5 rounded-full bg-[#f4be4f]"></span>
                 <span className="w-2.5 h-2.5 rounded-full bg-[#62c554]"></span>
                 <span className="ml-2 font-semibold text-zinc-800 text-[11px]">
-                  Experiment 15 • AI Creative & Full-Stack Platform, desktop 1440
+                  WebDev AI Studio • Full-Stack Platform, desktop 1440
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] text-zinc-400">Interactive Prototype • Mouse / Slider</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                <span className="inline-flex items-center gap-1.5 text-[10px] text-zinc-600 font-medium bg-white/80 px-2 py-0.5 rounded border border-zinc-200">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-sm"></span>
+                  Mouse, touch and arrow keys
+                </span>
               </div>
             </div>
 
-            {/* Split Screen Container */}
-            <div className="relative h-[340px] sm:h-[380px] bg-[#faf9f6] select-none overflow-hidden">
+            {/* Split Screen Container (Interactive pointer events) */}
+            <div
+              ref={sliderContainerRef}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+              role="slider"
+              aria-valuenow={sliderPos}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Before and after prototype comparison slider"
+              className="relative h-[360px] sm:h-[400px] bg-white select-none overflow-hidden cursor-ew-resize focus:outline-none"
+            >
               {/* Shipped / Production Design Layer (Full width underneath) */}
               <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between bg-white">
+                {/* Internal App Header */}
                 <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded bg-blue-600 text-white font-bold text-xs flex items-center justify-center font-mono">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded bg-blue-600 text-white font-bold text-xs flex items-center justify-center font-mono shadow-xs">
                       AI
                     </div>
-                    <span className="font-bold text-xs text-zinc-900">
-                      AI Creative Studio • Gemini 1.5 & Express REST
-                    </span>
+                    <div>
+                      <div className="font-bold text-xs text-zinc-900 leading-tight">
+                        WebDev AI Studio Platform
+                      </div>
+                      <div className="text-[10px] text-zinc-500 font-mono">
+                        Gemini 1.5 & Express REST Gateway
+                      </div>
+                    </div>
                   </div>
                   <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono text-zinc-600 bg-zinc-100 font-medium">
+                      Step 2 of 4
+                    </span>
                     <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                       ● Online
                     </span>
@@ -315,114 +385,198 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 my-auto">
-                  <div className="p-4 rounded-xl border border-zinc-200 bg-zinc-50/60 font-mono text-xs">
+                {/* Subtitle inside mockup */}
+                <div className="text-[11px] font-mono text-zinc-500 font-medium">
+                  Select Core Engineering Module • Course: BCO682A
+                </div>
+
+                {/* 2 Core Component Cards (1:1 aligned with wireframe) */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Card 1: AI Engine */}
+                  <div className="p-4 rounded-xl border border-zinc-200 bg-zinc-50/70 font-mono text-xs">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-zinc-900 text-[11px]">Exp 09/11: Gemini 1.5 LLM Engine</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-bold">API ACTIVE</span>
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-[10px]">
+                          AI
+                        </span>
+                        <div>
+                          <div className="font-bold text-zinc-950 text-[11px]">Generative AI Studio</div>
+                          <div className="text-[9px] text-zinc-500">Google Gemini 1.5 LLM</div>
+                        </div>
+                      </div>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-bold border border-blue-200">
+                        ACTIVE
+                      </span>
                     </div>
-                    <p className="text-[10px] text-zinc-600 line-clamp-2 font-sans mb-3">
-                      &quot;Synthesize full-stack REST microservice with JWT RBAC authorization and MongoDB B-tree indexes...&quot;
-                    </p>
-                    <div className="flex items-center gap-1.5 pt-1">
-                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px]">384 tokens</span>
+                    <div className="flex items-center gap-1.5 pt-2 border-t border-zinc-200/60">
+                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px] text-zinc-700">384 tokens</span>
                       <span className="px-1.5 py-0.5 rounded bg-emerald-600 text-white text-[9px] font-bold">42ms latency</span>
-                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px]">temp: 0.7</span>
+                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px] text-zinc-700">temp: 0.7</span>
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl border border-zinc-200 bg-zinc-50/60 font-mono text-xs">
+                  {/* Card 2: MongoDB REST */}
+                  <div className="p-4 rounded-xl border border-zinc-200 bg-zinc-50/70 font-mono text-xs">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-zinc-900 text-[11px]">Exp 05/08: MongoDB & REST API</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">INDEXED</span>
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">
+                          DB
+                        </span>
+                        <div>
+                          <div className="font-bold text-zinc-950 text-[11px]">MongoDB & REST API</div>
+                          <div className="text-[9px] text-zinc-500">Express 5 • B-Tree Index</div>
+                        </div>
+                      </div>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+                        INDEXED
+                      </span>
                     </div>
-                    <p className="text-[10px] text-zinc-600 line-clamp-2 font-sans mb-3">
-                      Compound B-tree indexing on student rollNo with lean aggregation pipeline and CORS middleware.
-                    </p>
-                    <div className="flex items-center gap-1.5 pt-1">
-                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px]">JWT: Verified</span>
+                    <div className="flex items-center gap-1.5 pt-2 border-t border-zinc-200/60">
+                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px] text-zinc-700">JWT: Bearer</span>
                       <span className="px-1.5 py-0.5 rounded bg-blue-600 text-white text-[9px] font-bold">18ms IXSCAN</span>
-                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px]">Express 5</span>
+                      <span className="px-1.5 py-0.5 rounded bg-zinc-200/80 text-[9px] text-zinc-700">Express 5</span>
                     </div>
                   </div>
                 </div>
 
+                {/* 8 Action/Endpoint Buttons Grid (aligned with Wireframe) */}
+                <div className="grid grid-cols-4 gap-2 font-mono text-[10px]">
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    GET /tasks
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    POST /auth
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-[#065f46] text-white text-center font-bold shadow-xs">
+                    GET /students
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    POST /generate
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    GET /health
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    POST /chat
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    GET /metrics
+                  </div>
+                  <div className="py-1.5 px-2 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-700 text-center font-medium">
+                    POST /audit
+                  </div>
+                </div>
+
+                {/* Bottom Status Banner */}
                 <div className="p-3 bg-emerald-50/80 rounded-lg border border-emerald-200 text-[11px] text-emerald-900 flex items-center justify-between font-mono">
-                  <span>✓ Active Pipeline: Bearer JWT authorized. End-to-end full stack architecture operational on Node.js & Next.js.</span>
-                  <span className="font-bold text-[10px] px-2 py-0.5 rounded bg-emerald-200 text-emerald-900">PRODUCTION</span>
+                  <span>✓ Active Pipeline: Bearer JWT authorized • MongoDB B-tree indexed • 15 microservices passing.</span>
+                  <span className="font-bold text-[10px] px-2 py-0.5 rounded bg-emerald-200 text-emerald-900">
+                    PRODUCTION
+                  </span>
                 </div>
               </div>
 
-              {/* Wireframe / Prototype Layer (Clipped to slider percentage) */}
+              {/* Wireframe / Prototype Layer (Clipped precisely to slider percentage) */}
               <div
-                className="absolute inset-y-0 left-0 bg-[#ebe9e1] border-r border-blue-600 overflow-hidden"
+                className="absolute inset-y-0 left-0 bg-[#ebe9e1] border-r-2 border-blue-600 overflow-hidden"
                 style={{ width: `${sliderPos}%` }}
               >
+                {/* Exactly identical width & padding as Shipped layer to guarantee 1:1 wipe alignment */}
                 <div className="w-[740px] p-6 sm:p-8 h-full flex flex-col justify-between font-mono">
+                  {/* Internal App Header (Wireframe) */}
                   <div className="flex items-center justify-between border-b border-zinc-300 pb-3">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2.5">
                       <div className="w-6 h-6 rounded bg-zinc-400"></div>
-                      <div className="w-48 h-3.5 bg-zinc-300 rounded"></div>
-                    </div>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-medium border border-zinc-400 text-zinc-600 bg-white/70">
-                      Wireframe, week 2
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 my-auto">
-                    <div className="p-4 rounded-xl border border-zinc-300 bg-white/40 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="w-28 h-3 bg-zinc-300 rounded"></div>
-                        <div className="w-12 h-3 bg-zinc-200 rounded"></div>
-                      </div>
-                      <div className="space-y-1 py-1">
-                        <div className="w-full h-2.5 bg-zinc-200 rounded"></div>
-                        <div className="w-4/5 h-2.5 bg-zinc-200 rounded"></div>
-                      </div>
-                      <div className="flex gap-1.5 pt-1">
-                        <div className="w-14 h-5 bg-zinc-200 rounded"></div>
-                        <div className="w-14 h-5 bg-zinc-300 rounded"></div>
-                        <div className="w-14 h-5 bg-zinc-200 rounded"></div>
+                      <div className="space-y-1">
+                        <div className="w-40 h-3 bg-zinc-300 rounded"></div>
+                        <div className="w-28 h-2 bg-zinc-300/70 rounded"></div>
                       </div>
                     </div>
-
-                    <div className="p-4 rounded-xl border border-zinc-300 bg-white/40 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="w-28 h-3 bg-zinc-300 rounded"></div>
-                        <div className="w-12 h-3 bg-zinc-200 rounded"></div>
-                      </div>
-                      <div className="space-y-1 py-1">
-                        <div className="w-full h-2.5 bg-zinc-200 rounded"></div>
-                        <div className="w-4/5 h-2.5 bg-zinc-200 rounded"></div>
-                      </div>
-                      <div className="flex gap-1.5 pt-1">
-                        <div className="w-14 h-5 bg-zinc-200 rounded"></div>
-                        <div className="w-14 h-5 bg-zinc-300 rounded"></div>
-                        <div className="w-14 h-5 bg-zinc-200 rounded"></div>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-16 h-4 bg-zinc-200 rounded"></div>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-medium border border-zinc-400 text-zinc-600 bg-white/70">
+                        Wireframe, week 2
+                      </span>
                     </div>
                   </div>
 
-                  <div className="p-3 bg-zinc-200/60 rounded-lg border border-zinc-300 flex items-center justify-between">
-                    <div className="w-64 h-3 bg-zinc-300 rounded"></div>
-                    <div className="w-16 h-3 bg-zinc-300 rounded"></div>
+                  {/* Subtitle wireframe bar */}
+                  <div className="w-56 h-2.5 bg-zinc-300 rounded"></div>
+
+                  {/* 2 Core Component Cards (Wireframe skeleton matching Shipped grid) */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* Card 1 Skeleton */}
+                    <div className="p-4 rounded-xl border border-zinc-300 bg-white/40 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-zinc-400"></div>
+                          <div className="space-y-1">
+                            <div className="w-24 h-3 bg-zinc-400 rounded"></div>
+                            <div className="w-16 h-2 bg-zinc-300 rounded"></div>
+                          </div>
+                        </div>
+                        <div className="w-12 h-4 bg-zinc-300 rounded"></div>
+                      </div>
+                      <div className="flex gap-1.5 pt-2 border-t border-zinc-300/60">
+                        <div className="w-14 h-4 bg-zinc-300 rounded"></div>
+                        <div className="w-14 h-4 bg-zinc-400 rounded"></div>
+                        <div className="w-14 h-4 bg-zinc-300 rounded"></div>
+                      </div>
+                    </div>
+
+                    {/* Card 2 Skeleton */}
+                    <div className="p-4 rounded-xl border border-zinc-300 bg-white/40 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-zinc-400"></div>
+                          <div className="space-y-1">
+                            <div className="w-24 h-3 bg-zinc-400 rounded"></div>
+                            <div className="w-16 h-2 bg-zinc-300 rounded"></div>
+                          </div>
+                        </div>
+                        <div className="w-12 h-4 bg-zinc-300 rounded"></div>
+                      </div>
+                      <div className="flex gap-1.5 pt-2 border-t border-zinc-300/60">
+                        <div className="w-14 h-4 bg-zinc-300 rounded"></div>
+                        <div className="w-14 h-4 bg-zinc-400 rounded"></div>
+                        <div className="w-14 h-4 bg-zinc-300 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 8 Action Buttons Skeleton (Wireframe) */}
+                  <div className="grid grid-cols-4 gap-2">
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                    <div className="h-6 rounded-lg bg-zinc-400 border border-zinc-500"></div>
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                    <div className="h-6 rounded-lg bg-zinc-300/80 border border-zinc-400"></div>
+                  </div>
+
+                  {/* Bottom Banner Skeleton */}
+                  <div className="p-3 bg-zinc-200/70 rounded-lg border border-zinc-300 flex items-center justify-between">
+                    <div className="w-64 h-3 bg-zinc-400 rounded"></div>
+                    <div className="w-16 h-4 bg-zinc-400 rounded"></div>
                   </div>
                 </div>
               </div>
 
-              {/* Slider Handle Pill */}
+              {/* Slider Handle Pill (Circular Cyan Thumb matching Reference) */}
               <div
                 className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 pointer-events-none"
                 style={{ left: `${sliderPos}%` }}
               >
-                <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-mono shadow-md border-2 border-white">
+                <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-mono shadow-lg border-2 border-white select-none">
                   ◀▶
                 </div>
               </div>
             </div>
 
             {/* Slider control bar */}
-            <div className="p-3 bg-[#f7f6f2] border-t border-[#e2e0d7] flex items-center justify-between gap-4 text-xs">
+            <div className="p-3 bg-[#f7f6f2] border-t border-[#e2e0d7] flex flex-wrap items-center justify-between gap-4 text-xs">
               <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-600">
                 <span>Wireframe (W2)</span>
                 <input
@@ -431,7 +585,7 @@ export default function DashboardPage() {
                   max="100"
                   value={sliderPos}
                   onChange={(e) => setSliderPos(Number(e.target.value))}
-                  className="w-36 sm:w-48 h-1.5 bg-zinc-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  className="w-32 sm:w-48 h-1.5 bg-zinc-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
                 <span>Shipped (W9)</span>
               </div>
@@ -439,19 +593,19 @@ export default function DashboardPage() {
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => setSliderPos(0)}
-                  className="px-2 py-0.5 rounded font-mono text-[10px] border border-zinc-300 hover:bg-white text-zinc-700 transition"
+                  className="px-2.5 py-1 rounded font-mono text-[10px] border border-zinc-300 hover:bg-white text-zinc-700 transition"
                 >
                   Shipped 100%
                 </button>
                 <button
                   onClick={() => setSliderPos(50)}
-                  className="px-2 py-0.5 rounded font-mono text-[10px] border border-zinc-300 hover:bg-white text-zinc-700 transition"
+                  className="px-2.5 py-1 rounded font-mono text-[10px] border border-zinc-300 hover:bg-white text-zinc-700 transition font-bold"
                 >
                   50 / 50 Split
                 </button>
                 <button
                   onClick={() => setSliderPos(100)}
-                  className="px-2 py-0.5 rounded font-mono text-[10px] border border-zinc-300 hover:bg-white text-zinc-700 transition"
+                  className="px-2.5 py-1 rounded font-mono text-[10px] border border-zinc-300 hover:bg-white text-zinc-700 transition"
                 >
                   Wireframe 100%
                 </button>
@@ -459,44 +613,38 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Academic Specification & AI Visual Card (4 cols) */}
+          {/* Academic Evaluation & Studio ID Card (4 cols) */}
           <div className="lg:col-span-4 bg-white rounded-2xl border border-[#d8d6ce] p-5 shadow-sm flex flex-col justify-between">
             <div>
-              {/* AI Generated Hero Artwork matching the reference image layout */}
-              <div className="relative rounded-xl overflow-hidden border border-[#d8d6ce] bg-zinc-950 mb-4 h-40 group shadow-2xs">
+              {/* Studio Artwork matching reference style */}
+              <div className="relative rounded-xl overflow-hidden border border-[#d8d6ce] bg-slate-50 mb-4 h-40 group shadow-2xs">
                 <img
                   src="/images/ai-hero-visual.png"
-                  alt="Web Development Using AI - Neural Architecture Artwork"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500"
+                  alt="Web Development Using AI - Studio Specification Artwork"
+                  className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/20 to-transparent flex items-end p-2.5">
-                  <div className="text-white font-mono text-[10px] flex items-center justify-between w-full">
-                    <span className="tracking-wider">WEB DEV USING AI</span>
-                    <span className="px-1.5 py-0.5 rounded bg-blue-600 text-white font-bold text-[9px]">
-                      AI GENERATED
-                    </span>
-                  </div>
-                </div>
               </div>
 
+              {/* Sub-header metric header */}
               <div className="flex items-center justify-between pb-2 border-b border-zinc-100 mb-3">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-blue-600 font-bold">
-                  [ SPECIFICATION & EVALUATION ]
+                  RESULT, FINAL LAB EVALUATION
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold">
                   VERIFIED
                 </span>
               </div>
 
               <div className="mb-3">
-                <div className="text-3xl font-extrabold tracking-tight text-zinc-950 font-mono">
-                  15 <span className="text-xs font-sans font-normal text-zinc-500">of 15</span>
+                <div className="text-4xl font-extrabold tracking-tight text-zinc-950 font-mono">
+                  15 <span className="text-xl font-normal text-zinc-400">of 15</span>
                 </div>
-                <div className="text-xs text-zinc-600 font-medium mt-0.5">
-                  Experiments implemented, tested & documented for college evaluation.
+                <div className="text-xs text-zinc-600 font-medium mt-1 leading-snug">
+                  of curriculum experiments verified across responsive design, REST microservices, indexed persistence, and Generative AI.
                 </div>
               </div>
 
+              {/* Candidate Metadata Specs */}
               <div className="space-y-1.5 py-2.5 border-t border-b border-zinc-100 text-xs font-mono">
                 <div className="flex justify-between items-center">
                   <span className="text-zinc-500">Candidate:</span>
@@ -527,7 +675,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="pt-3 space-y-2">
+            <div className="pt-4 space-y-2">
               <Link
                 href="/exp15"
                 className="w-full py-2.5 px-4 bg-zinc-950 hover:bg-blue-600 text-white rounded-xl text-xs font-mono font-medium text-center transition flex items-center justify-center gap-2 shadow-2xs"
@@ -603,6 +751,206 @@ export default function DashboardPage() {
           </div>
           <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 font-mono">0</div>
           <div className="text-xs font-mono text-zinc-500 mt-1">Build Errors & Warnings</div>
+        </div>
+      </div>
+
+      {/* 4-QUADRANT FEATURE SHOWCASE (INSPIRED BY REFERENCE IMAGE 3) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
+        {/* Quadrant 1: Inside the Record (Preview of 4 Tiers) */}
+        <div className="bg-white rounded-2xl border border-[#d8d6ce] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div className="text-[11px] font-mono text-blue-600 mb-1 font-semibold">
+              [: Inside the record :]
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 mb-2">
+              A full record. 15 Practicals across 4 engineering tiers.
+            </h2>
+            <p className="text-xs text-zinc-600 font-mono mb-6">
+              Every practical includes documented prompts, executable code, live test suites, and academic verification.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 text-center">
+                <div className="font-mono font-bold text-sm text-zinc-900">01–04</div>
+                <div className="text-[10px] font-mono text-blue-600 font-semibold mt-0.5">Frontend</div>
+                <div className="text-[9px] text-zinc-500 mt-1">HTML5, CSS, DOM</div>
+              </div>
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 text-center">
+                <div className="font-mono font-bold text-sm text-zinc-900">05–08</div>
+                <div className="text-[10px] font-mono text-blue-600 font-semibold mt-0.5">Backend & DB</div>
+                <div className="text-[9px] text-zinc-500 mt-1">Express, MongoDB</div>
+              </div>
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 text-center">
+                <div className="font-mono font-bold text-sm text-zinc-900">09–12</div>
+                <div className="text-[10px] font-mono text-blue-600 font-semibold mt-0.5">Generative AI</div>
+                <div className="text-[9px] text-zinc-500 mt-1">Gemini 1.5, GPT-4o</div>
+              </div>
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 text-center">
+                <div className="font-mono font-bold text-sm text-zinc-900">13–15</div>
+                <div className="text-[10px] font-mono text-blue-600 font-semibold mt-0.5">DevOps & Cap</div>
+                <div className="text-[9px] text-zinc-500 mt-1">CI/CD & Capstone</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 mt-6 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-500">
+            <span>Course Code: BCO682A</span>
+            <span className="text-zinc-800 font-bold">15 / 15 Complete</span>
+          </div>
+        </div>
+
+        {/* Quadrant 2: Four Tiers, Measured */}
+        <div className="bg-white rounded-2xl border border-[#d8d6ce] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div className="text-[11px] font-mono text-blue-600 mb-1 font-semibold">
+              [: Work / Measured :]
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 mb-2">
+              Four tiers,{' '}
+              <span className="blueprint-select-box">
+                <span className="blueprint-handle blueprint-handle-tl" />
+                <span className="blueprint-handle blueprint-handle-tr" />
+                <span className="blueprint-handle blueprint-handle-bl" />
+                <span className="blueprint-handle blueprint-handle-br" />
+                measured.
+                <span className="blueprint-dim-pill">436 × 74</span>
+              </span>
+            </h2>
+            <p className="text-xs text-zinc-600 font-mono mb-4">
+              Every practical names the tech stack, prompt strategy, and verified execution metrics.
+            </p>
+
+            <ul className="space-y-1.5 text-xs text-zinc-700 font-mono mb-6">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-blue-600 rounded-sm"></span>
+                <span>Verified execution metric on every practical card</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-blue-600 rounded-sm"></span>
+                <span>Wireframe to production prototype split slider</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-blue-600 rounded-sm"></span>
+                <span>Prompt engineering analysis for every laboratory exercise</span>
+              </li>
+            </ul>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 rounded-xl border border-zinc-200 bg-[#f7f6f2]">
+                <div className="text-2xl font-extrabold text-zinc-950 font-mono">100%</div>
+                <div className="text-[11px] font-mono text-zinc-600">Mobile Responsive</div>
+              </div>
+              <div className="p-3 rounded-xl border border-zinc-200 bg-[#f7f6f2]">
+                <div className="text-2xl font-extrabold text-zinc-950 font-mono">18ms</div>
+                <div className="text-[11px] font-mono text-zinc-600">MongoDB IXSCAN Query</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-4 mt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-500">
+            <span>Evaluated by Mr. Mohit Parashar</span>
+            <span className="text-emerald-600 font-bold">● Zero Regressions</span>
+          </div>
+        </div>
+
+        {/* Quadrant 3: Fits Every Screen (Iconic Royal Blue Section) */}
+        <div className="rounded-2xl bg-[#0d5bf5] text-white p-6 sm:p-8 flex flex-col justify-between shadow-md relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-mono text-blue-200 font-semibold tracking-wider">
+                [: RESPONSIVE :]
+              </span>
+              <div className="blueprint-frame-box border-blue-200 text-white bg-blue-700/50 text-[10px]">
+                Frame 09 / 15
+                <span className="blueprint-dim-pill bg-white text-blue-600">360 × 800</span>
+              </div>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+              Fits every screen.
+            </h2>
+            <p className="text-xs sm:text-sm text-blue-100 font-mono max-w-md leading-relaxed mb-6">
+              Every practical interface restacks gracefully for smartphones, tablets, and ultra-wide desktops. The wipes work seamlessly by touch. Checked from 360px.
+            </p>
+
+            {/* Responsive device mockups */}
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 text-center">
+                <div className="font-mono text-xs font-bold text-white">Mobile</div>
+                <div className="text-[10px] text-blue-200 font-mono mt-0.5">360px – 480px</div>
+                <div className="text-[9px] text-white/80 mt-1">Fluid vertical stack</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 text-center">
+                <div className="font-mono text-xs font-bold text-white">Tablet</div>
+                <div className="text-[10px] text-blue-200 font-mono mt-0.5">768px – 1024px</div>
+                <div className="text-[9px] text-white/80 mt-1">2-Column adaptive</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20 text-center">
+                <div className="font-mono text-xs font-bold text-white">Desktop</div>
+                <div className="text-[10px] text-blue-200 font-mono mt-0.5">1440px – 1920px</div>
+                <div className="text-[9px] text-white/80 mt-1">Full 12-col grid</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 mt-6 border-t border-blue-400/30 flex items-center justify-between text-xs font-mono text-blue-100 relative z-10">
+            <span>Tailwind Breakpoints (sm, md, lg, xl)</span>
+            <span className="font-bold">✓ 100% Mobile Ready</span>
+          </div>
+        </div>
+
+        {/* Quadrant 4: How a Project Runs (Workflow Timeline) */}
+        <div className="bg-white rounded-2xl border border-[#d8d6ce] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div className="text-[11px] font-mono text-blue-600 mb-1 font-semibold">
+              [: Process / Lifecycle :]
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 mb-2">
+              How a practical runs.
+            </h2>
+            <p className="text-xs text-zinc-600 font-mono mb-6">
+              A systematic 4-step AI-assisted software engineering lifecycle applied across all 15 laboratory experiments.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 space-y-1">
+                <span className="text-[10px] font-mono font-bold text-blue-600">01. Listen</span>
+                <div className="font-bold text-xs text-zinc-900">Prompt</div>
+                <p className="text-[10px] text-zinc-500 font-mono leading-tight">
+                  Syllabus constraints &amp; prompt design.
+                </p>
+              </div>
+
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 space-y-1">
+                <span className="text-[10px] font-mono font-bold text-blue-600">02. Frame</span>
+                <div className="font-bold text-xs text-zinc-900">Synthesize</div>
+                <p className="text-[10px] text-zinc-500 font-mono leading-tight">
+                  Next.js, Express &amp; MongoDB code.
+                </p>
+              </div>
+
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 space-y-1">
+                <span className="text-[10px] font-mono font-bold text-blue-600">03. Test</span>
+                <div className="font-bold text-xs text-zinc-900">Audit &amp; QA</div>
+                <p className="text-[10px] text-zinc-500 font-mono leading-tight">
+                  Automated test suites &amp; OWASP check.
+                </p>
+              </div>
+
+              <div className="p-3 bg-[#f7f6f2] rounded-xl border border-zinc-200 space-y-1">
+                <span className="text-[10px] font-mono font-bold text-blue-600">04. Ship</span>
+                <div className="font-bold text-xs text-zinc-900">Release</div>
+                <p className="text-[10px] text-zinc-500 font-mono leading-tight">
+                  Edge CDN deploy &amp; 49-pg lab record.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 mt-6 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-500">
+            <span>Engineering Methodology</span>
+            <span className="text-zinc-900 font-bold">Reproducible &amp; Verified</span>
+          </div>
         </div>
       </div>
 

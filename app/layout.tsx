@@ -58,17 +58,19 @@ export default function RootLayout({
             </nav>
 
             {/* Student Frame Badge & Academic Status */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <div className="hidden lg:flex flex-col items-end">
-                <div className="relative border border-blue-600/40 rounded px-2 py-0.5 text-[10px] font-mono text-blue-700 bg-white shadow-2xs">
+                <div className="blueprint-frame-box">
+                  <span className="blueprint-handle blueprint-handle-tl" />
+                  <span className="blueprint-handle blueprint-handle-tr" />
+                  <span className="blueprint-handle blueprint-handle-bl" />
+                  <span className="blueprint-handle blueprint-handle-br" />
                   Frame 01 / 15
-                  <span className="absolute -bottom-2.5 right-1 text-[8px] font-mono text-blue-600 bg-blue-100 px-1 rounded-2xs">
-                    1920 × 1080
-                  </span>
+                  <span className="blueprint-dim-pill">1920 × 1080</span>
                 </div>
               </div>
 
-              <div className="text-right text-xs pl-2 border-l border-zinc-200">
+              <div className="text-right text-xs pl-3 border-l border-zinc-200">
                 <div className="font-bold text-zinc-900 leading-tight">Mayank Goyal</div>
                 <div className="text-[10px] font-mono text-zinc-500">23BCON1662 • Sec P</div>
               </div>

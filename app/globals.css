@@ -34,32 +34,41 @@ body {
   gap: 4px;
 }
 
+.blueprint-frame-box {
+  position: relative;
+  border: 1.5px solid #2563eb;
+  border-radius: 3px;
+  padding: 2px 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #2563eb;
+  font-weight: 600;
+  background-color: rgba(37, 99, 235, 0.03);
+  display: inline-flex;
+  align-items: center;
+}
+
 .blueprint-select-box {
   position: relative;
   display: inline-block;
   border: 1.5px solid #2563eb;
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 0 6px;
   background-color: rgba(37, 99, 235, 0.02);
 }
 
-.blueprint-select-box::before,
-.blueprint-select-box::after {
-  content: '';
+.blueprint-handle {
   position: absolute;
   width: 5px;
   height: 5px;
   background-color: #ffffff;
   border: 1.5px solid #2563eb;
+  pointer-events: none;
 }
-.blueprint-select-box::before {
-  top: -3px;
-  left: -3px;
-}
-.blueprint-select-box::after {
-  bottom: -3px;
-  right: -3px;
-}
+.blueprint-handle-tl { top: -3px; left: -3px; }
+.blueprint-handle-tr { top: -3px; right: -3px; }
+.blueprint-handle-bl { bottom: -3px; left: -3px; }
+.blueprint-handle-br { bottom: -3px; right: -3px; }
 
 .blueprint-dim-pill {
   position: absolute;
