@@ -40,29 +40,26 @@ export default function RootLayout({
               <Link href="/exp15" className="hover:text-blue-600 text-blue-600 font-bold transition">15 Capstone</Link>
             </nav>
 
-            {/* Student Frame Badge & High-Contrast Black & White Print Verification Badge */}
-            <div className="flex items-center gap-3">
+            {/* Student Frame Badge & Candidate Details */}
+            <div className="flex items-center gap-4">
               <div className="hidden lg:flex flex-col items-end">
-                <div className="blueprint-frame-box border-zinc-950 text-zinc-950 bg-white shadow-2xs">
-                  <span className="blueprint-handle blueprint-handle-tl border-zinc-950" />
-                  <span className="blueprint-handle blueprint-handle-tr border-zinc-950" />
-                  <span className="blueprint-handle blueprint-handle-bl border-zinc-950" />
-                  <span className="blueprint-handle blueprint-handle-br border-zinc-950" />
+                <div className="blueprint-frame-box">
+                  <span className="blueprint-handle blueprint-handle-tl" />
+                  <span className="blueprint-handle blueprint-handle-tr" />
+                  <span className="blueprint-handle blueprint-handle-bl" />
+                  <span className="blueprint-handle blueprint-handle-br" />
                   Frame 01 / 15
-                  <span className="blueprint-dim-pill bg-zinc-950 text-white font-bold">1920 × 1080</span>
+                  <span className="blueprint-dim-pill">1920 × 1080</span>
                 </div>
               </div>
 
-              {/* High-Contrast Print-Ready Student Identification Box */}
-              <div className="border-2 border-zinc-950 bg-white px-3 py-1 rounded-md shadow-xs text-right">
-                <div className="flex items-center justify-end gap-1.5 leading-none mb-1">
-                  <span className="w-2 h-2 rounded-full bg-zinc-950"></span>
-                  <span className="font-black text-xs text-zinc-950 tracking-tight font-sans uppercase">
-                    Mayank Goyal
-                  </span>
+              {/* Student identification with increased size and clear boldness */}
+              <div className="text-right pl-3 border-l-2 border-zinc-300">
+                <div className="font-bold text-sm sm:text-base text-zinc-950 leading-tight">
+                  Mayank Goyal
                 </div>
-                <div className="text-[11px] font-mono font-black text-white bg-zinc-950 px-2 py-0.5 rounded tracking-wide leading-tight">
-                  23BCON1662 • SEC P
+                <div className="text-xs sm:text-[13px] font-mono font-semibold text-zinc-800">
+                  23BCON1662 • Sec P
                 </div>
               </div>
             </div>
