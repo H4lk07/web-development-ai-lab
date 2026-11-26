@@ -13,23 +13,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link href="https://webdevrecord.531800.xyz/" hrefLang="x-default" rel="alternate" />
-        <link href="https://fr.webdevrecord.531800.xyz/" hrefLang="fr" rel="alternate" />
-        <link href="https://ka.webdevrecord.531800.xyz/" hrefLang="ka" rel="alternate" />
-        <link href="https://it.webdevrecord.531800.xyz/" hrefLang="it" rel="alternate" />
-        <script
-          src="https://script-cdn.multilipi.com/static/JS/page_translations.js"
-          {...{
-            'multilipi-key': '3f74a306-71c0-4411-9f89-103d730d2a8f',
-            mode: 'auto',
-            'data-pos-x': '50',
-            'data-pos-y': '50',
-          }}
-          crossOrigin="anonymous"
-          defer
-        />
-      </head>
       <body className="flex flex-col min-h-screen antialiased bg-[#f7f6f2] text-zinc-900 selection:bg-blue-600 selection:text-white">
         <header className="sticky top-0 z-50 bg-[#f7f6f2]/90 backdrop-blur-md border-b border-[#e5e4de]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
